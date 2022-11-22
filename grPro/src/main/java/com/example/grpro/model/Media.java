@@ -1,4 +1,4 @@
 package com.example.grpro.model;
 
-public abstract class Medie {
+public abstract class Media {
 }
