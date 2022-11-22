@@ -1,4 +1,4 @@
-package com.example.grpro;
+package com.example.grpro.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

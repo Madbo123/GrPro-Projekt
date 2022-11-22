@@ -6,4 +6,6 @@ module com.example.grpro {
 
     opens com.example.grpro to javafx.fxml;
     exports com.example.grpro;
+    exports com.example.grpro.controller;
+    opens com.example.grpro.controller to javafx.fxml;
 }
