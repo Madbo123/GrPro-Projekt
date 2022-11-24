@@ -38,3 +38,6 @@ build/
 .DS_Store
 
 /grPro/data/**
+/grPro/src/main/java/com/example/grpro/test
+
+/grPro/src/main/java/com/example/grpro/test/**
