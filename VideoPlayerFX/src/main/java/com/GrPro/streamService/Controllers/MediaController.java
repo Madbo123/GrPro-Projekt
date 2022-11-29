@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MediaController {
 
-    public List<Media> FilterByTitle(List<Media> list, String stringToSortBy) {
+    public static List<Media> FilterByTitle(List<Media> list, String stringToSortBy) {
         List<Media> filtered = new ArrayList<Media>();
 
         for (Media m : list) {
@@ -17,7 +17,7 @@ public class MediaController {
         return filtered;
     }
 
-    public  List<Media> FilterByType(List<Media> list, String typeToSortBy) {
+    public static List<Media> FilterByType(List<Media> list, String typeToSortBy) {
         List<Media> filtered = new ArrayList<Media>();
 
         for (Media m : list) {
@@ -28,7 +28,7 @@ public class MediaController {
         return filtered;
     }
 
-    public List<Media> FilterByGenre(List<Media> list, String genreToSortBy) {
+    public static List<Media> FilterByGenre(List<Media> list, String genreToSortBy) {
         List<Media> filtered = new ArrayList<Media>();
 
         for (Media m : list) {
@@ -39,7 +39,7 @@ public class MediaController {
         return filtered;
     }
     
-    public List<Media> ApplyFilters(ArrayList<Media> mediaList, String searchWord, String type, String genre) {
+    public static List<Media> ApplyFilters(ArrayList<Media> mediaList, String searchWord, String type, String genre) {
         List<Media> copiedMediaList = new ArrayList<>(mediaList);
 
         if (searchWord != null && !searchWord.equals("")) {
