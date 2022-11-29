@@ -1,6 +1,8 @@
 package com.GrPro.streamService.Controllers;
 
 import com.GrPro.streamService.Model.Media;
+import com.GrPro.streamService.Model.Singleton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class MediaController {
         List<Media> filtered = new ArrayList<Media>();
 
         for (Media m : list) {
-            if (m.getTitle().contains(stringToSortBy)) {
+            if (m.getTitle().toLowerCase().contains(stringToSortBy.toLowerCase())) {
                 filtered.add(m);
             }
         }
@@ -39,8 +41,8 @@ public class MediaController {
         return filtered;
     }
     
-    public static List<Media> ApplyFilters(ArrayList<Media> mediaList, String searchWord, String type, String genre) {
-        List<Media> copiedMediaList = new ArrayList<>(mediaList);
+    public static List<Media> ApplyFilters(String searchWord, String type, String genre) {
+        List<Media> copiedMediaList = Singleton.getInstance().getMedia();
 
         if (searchWord != null && !searchWord.equals("")) {
             copiedMediaList = FilterByTitle(copiedMediaList, searchWord);
