@@ -71,7 +71,6 @@ public class IOController {
         }
         File file1 = new File("src/main/resources/Data/serier.txt");
         Scanner s1 = new Scanner(file1);
-        System.out.println(s1.nextLine());
         while(s1.hasNextLine()) {
             String[] line = s1.nextLine().split(";");
             for (int i = 0; i < line.length ; i++) {
@@ -95,7 +94,7 @@ public class IOController {
             med.add(serie);
         }
         Singleton.getInstance().insertArray(med);
-        System.out.println(Singleton.getInstance().getMedia());
+
     }
 
 
