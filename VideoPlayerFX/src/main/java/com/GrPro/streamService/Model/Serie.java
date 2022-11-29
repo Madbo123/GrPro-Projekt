@@ -8,5 +8,6 @@ public class Serie extends Media {
 
     public Serie(String title, List<String> categories, double rating, int releaseYear) {
         super(title, categories, rating, releaseYear);
+        typeOfMedia = "Serie";
     }
 }
