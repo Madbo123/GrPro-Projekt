@@ -1,0 +1,23 @@
+
+.ExitButton:hover {
+    -fx-opacity : 0.75;
+}
+
+.LoginButton:hover {
+    -fx-opacity : 0.75;
+}
+
+.CreateAccountButton:hover {
+    -fx-opacity : 0.75;
+}
+
+.SignInGuestButton:hover {
+    -fx-opacity : 0.6;
+}
+
+.CancelAccCreateButton:hover {
+    -fx-opacity : 0.75;
+}
+
+
+
