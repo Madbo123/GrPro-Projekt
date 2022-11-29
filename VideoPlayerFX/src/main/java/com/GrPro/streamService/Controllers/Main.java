@@ -12,6 +12,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage startStage) throws Exception {
+        IOController.loadMedia();
         Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
         startStage.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(root, 900, 600);
