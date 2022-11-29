@@ -25,4 +25,10 @@ public abstract class Media {
     public int getReleaseYear() {return _releaseYear;}
 
     public String getTypeOfMedia() {return typeOfMedia;}
+
+
+    @Override
+    public java.lang.String toString() {
+        return _title + "," + _categories + "," + typeOfMedia;
+    }
 }
