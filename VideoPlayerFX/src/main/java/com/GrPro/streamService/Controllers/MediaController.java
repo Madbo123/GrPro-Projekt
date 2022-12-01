@@ -10,7 +10,7 @@ import java.util.List;
 public class MediaController {
 
     public static List<Media> FilterByTitle(List<Media> list, String searchWord) {
-        List<Media> filtered = new ArrayList<Media>();
+        List<Media> filtered = new ArrayList<>();
 
         for (Media m : list) {
             if (m.getTitle().toLowerCase().contains(searchWord.toLowerCase())) {
@@ -21,10 +21,10 @@ public class MediaController {
     }
 
     public static List<Media> FilterByType(List<Media> list, String typeToSortBy) {
-        List<Media> filtered = new ArrayList<Media>();
+        List<Media> filtered = new ArrayList<>();
 
         for (Media m : list) {
-            if (m.getTypeOfMedia().toLowerCase().equals(typeToSortBy.toLowerCase())) {
+            if (m.getTypeOfMedia().equalsIgnoreCase(typeToSortBy)) {
                 filtered.add(m);
             }
         }
@@ -32,7 +32,7 @@ public class MediaController {
     }
 
     public static List<Media> FilterByGenre(List<Media> list, String genreToSortBy) {
-        List<Media> filtered = new ArrayList<Media>();
+        List<Media> filtered = new ArrayList<>();
 
         for (Media m : list) {
             if (m.getCategories().contains(genreToSortBy)) {
@@ -43,7 +43,7 @@ public class MediaController {
     }
 
     public static List<Media> FilterByRating(List<Media> list, double min, double max) {
-        List<Media> filtered = new ArrayList<Media>();
+        List<Media> filtered = new ArrayList<>();
 
         for (Media m : list) {
             if (m.getRating() > min && m.getRating() < max) {
@@ -55,7 +55,7 @@ public class MediaController {
     }
 
     public static List<Media> FilterByRelease(List<Media> list, int min, int max) {
-        List<Media> filtered = new ArrayList<Media>();
+        List<Media> filtered = new ArrayList<>();
 
         for (Media m : list) {
             if (m.getReleaseYear() > min && m.getReleaseYear() < max) {
@@ -66,17 +66,28 @@ public class MediaController {
         return filtered;
     }
     
-    public static List<Media> ApplyFilters(String searchWord, String type, String genre) {
+    public static List<Media> ApplyAllFilters(String searchWord, String type, String genre, double ratingMin, double ratingMax, int releaseYearMin, int releaseYearMax) {
         List<Media> copiedMediaList = new ArrayList<>(Singleton.getInstance().getMedia());
 
         if (searchWord != null && !searchWord.equals("")) {
             copiedMediaList = FilterByTitle(copiedMediaList, searchWord);
+            System.out.println("Applied Filter: SearchWord");
         }
         if (type.equals("Movie")  || type.equals("Serie")) {
             copiedMediaList = FilterByType(copiedMediaList, type);
+            System.out.println("Applied Filter: Type");
         }
         if (genre != null && !genre.equals("")) {
             copiedMediaList = FilterByGenre(copiedMediaList, genre);
+            System.out.println("Applied Filter: Genre");
+        }
+        if (ratingMax >= ratingMin && ratingMax > 0 && ratingMax <= 10) {
+            copiedMediaList = FilterByRating(copiedMediaList, ratingMin, ratingMax);
+            System.out.println("Applied Filter: Rating");
+        }
+        if (releaseYearMax >= releaseYearMin && releaseYearMin >= 0 && releaseYearMax > 0) {
+            copiedMediaList = FilterByRelease(copiedMediaList, releaseYearMin, releaseYearMax);
+            System.out.println("Applied Filter: Release Year");
         }
 
 
