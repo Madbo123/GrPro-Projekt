@@ -4,15 +4,16 @@ import com.GrPro.streamService.Model.Media;
 import com.GrPro.streamService.Model.Singleton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MediaController {
 
-    public static List<Media> FilterByTitle(List<Media> list, String stringToSortBy) {
+    public static List<Media> FilterByTitle(List<Media> list, String searchWord) {
         List<Media> filtered = new ArrayList<Media>();
 
         for (Media m : list) {
-            if (m.getTitle().toLowerCase().contains(stringToSortBy.toLowerCase())) {
+            if (m.getTitle().toLowerCase().contains(searchWord.toLowerCase())) {
                 filtered.add(m);
             }
         }
@@ -23,7 +24,7 @@ public class MediaController {
         List<Media> filtered = new ArrayList<Media>();
 
         for (Media m : list) {
-            if (m.getTypeOfMedia().equals(typeToSortBy)) {
+            if (m.getTypeOfMedia().toLowerCase().equals(typeToSortBy.toLowerCase())) {
                 filtered.add(m);
             }
         }
@@ -40,9 +41,33 @@ public class MediaController {
         }
         return filtered;
     }
+
+    public static List<Media> FilterByRating(List<Media> list, double min, double max) {
+        List<Media> filtered = new ArrayList<Media>();
+
+        for (Media m : list) {
+            if (m.getRating() > min && m.getRating() < max) {
+                filtered.add(m);
+            }
+        }
+
+        return filtered;
+    }
+
+    public static List<Media> FilterByRelease(List<Media> list, int min, int max) {
+        List<Media> filtered = new ArrayList<Media>();
+
+        for (Media m : list) {
+            if (m.getReleaseYear() > min && m.getReleaseYear() < max) {
+                filtered.add(m);
+            }
+        }
+
+        return filtered;
+    }
     
     public static List<Media> ApplyFilters(String searchWord, String type, String genre) {
-        List<Media> copiedMediaList = Singleton.getInstance().getMedia();
+        List<Media> copiedMediaList = new ArrayList<>(Singleton.getInstance().getMedia());
 
         if (searchWord != null && !searchWord.equals("")) {
             copiedMediaList = FilterByTitle(copiedMediaList, searchWord);
@@ -54,8 +79,31 @@ public class MediaController {
             copiedMediaList = FilterByGenre(copiedMediaList, genre);
         }
 
+
         return copiedMediaList;
     }
 
+
+    public static List<String> getAllGenres() {
+
+        List<String> genres = new ArrayList<>();
+        try {
+
+            List<Media> copiedMediaList = new ArrayList(Singleton.getInstance().getMedia());
+
+            for (Media m : copiedMediaList) {
+                for (String s : m.getCategories()) {
+                    if (!genres.contains(s)) genres.add(s);
+                }
+            }
+
+            Collections.sort(genres);
+
+        } catch (NullPointerException e) {
+            System.out.println("Error at MediaController. getAllGenres(). Message: " + e.getMessage());
+        }
+
+        return genres;
+    }
 
 }

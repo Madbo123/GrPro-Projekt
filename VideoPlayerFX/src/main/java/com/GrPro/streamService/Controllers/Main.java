@@ -13,7 +13,8 @@ public class Main extends Application {
     @Override
     public void start(Stage startStage) throws Exception {
         IOController.loadMedia();
-        System.out.println(MediaController.ApplyFilters("", "", ""));
+        System.out.println(MediaController.ApplyFilters("", "", "Western"));
+        System.out.println(MediaController.getAllGenres());
         Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
         startStage.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(root, 900, 600);
