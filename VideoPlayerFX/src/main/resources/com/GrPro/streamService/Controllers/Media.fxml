@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="249.0" prefWidth="140.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GrPro.streamService.Controllers.MediaController">
+   <children>
+      <ImageView fitHeight="209.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image/>
+         </image>
+      </ImageView>
+      <Label fx:id="movieTitle" layoutY="209.0" text="Movie title" />
+   </children>
+</AnchorPane>

@@ -2,12 +2,36 @@ package com.GrPro.streamService.Controllers;
 
 import com.GrPro.streamService.Model.Media;
 import com.GrPro.streamService.Model.Singleton;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class MediaController {
+
+
+
+    public void AddMediaToFlowpane(String searchWord, String type, String genre, double ratingMin, double ratingMax, int releaseYearMin, int releaseYearMax) throws IOException {
+        FlowPane flowPane = null;
+        List<Media> list = ApplyAllFilters(searchWord, type, genre, ratingMin, ratingMax, releaseYearMin, releaseYearMax);
+        for (Media media : list) {
+            AnchorPane view = FXMLLoader.load(getClass().getResource("Media.fxml"));
+            ImageView image1 = (ImageView) view.getChildren().get(0);
+            String path = "C:\\Users\\amxur\\OneDrive\\Documents\\ITU\\TestProjects\\JavaFXTest\\src\\main\\resources\\com\\example\\javafxtest\\filmplakater\\" + media.getTitle() + ".jpg";
+            image1.setImage(new Image(path));
+            Label label = (Label) view.getChildren().get(1);
+            label.setText(media.getTitle());
+            flowPane.getChildren().add(view);
+        }
+    }
 
     public static List<Media> FilterByTitle(List<Media> list, String searchWord) {
         List<Media> filtered = new ArrayList<>();
