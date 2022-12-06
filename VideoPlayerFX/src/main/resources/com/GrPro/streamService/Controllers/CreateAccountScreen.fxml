@@ -16,6 +16,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane fx:id="CreateAccountBG" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 37.9147%, #1a00ff 0.0%, #ff00db 100.0%);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GrPro.streamService.Controllers.CreateAccountController">
    <children>
       <Pane fx:id="DragArea" onMouseDragged="#DragEvent" onMousePressed="#StartDragEvent" prefHeight="70.0" prefWidth="900.0" />

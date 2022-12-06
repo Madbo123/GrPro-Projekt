@@ -53,6 +53,49 @@ public class IOController {
 
 
 
+    // media load metoder
+    public static void loadMedia() throws FileNotFoundException {
+        File file0 = new File("src/main/resources/Data/film.txt");
+        Scanner s = new Scanner(file0);
+        ArrayList<Media> med = new ArrayList<>();
+        while(s.hasNextLine()){
+            String[] line = s.nextLine().split(";");
+            ArrayList<String> arr  = new ArrayList<>();
+            for(String element :line[2].split(",")){
+                arr.add(element.trim());
+
+            }
+            Movie movie = new Movie(line[0],arr,Double.valueOf(line[3].replace(",", ".")),Integer.valueOf(line[1].trim()));
+            med.add(movie);
+        }
+        File file1 = new File("src/main/resources/Data/serier.txt");
+        Scanner s1 = new Scanner(file1);
+        while(s1.hasNextLine()) {
+            String[] line = s1.nextLine().split(";");
+            for (int i = 0; i < line.length ; i++) {
+                line[i] = line[i].trim();
+            }
+            ArrayList<String> arr = new ArrayList<>();
+            //if (!line[1].contains("-")) line[1] += "-";
+            String[] years = line[1].split("-");
+            for (String element : line[2].split(",")) {
+                arr.add(element.trim());
+
+            }
+            ArrayList<Integer> seasons = new ArrayList<>();
+            for (String element : line[4].split(",")) {
+                element = element.trim();
+                seasons.add(Integer.valueOf(element.split("-")[1]));
+            }
+            ArrayList<String> yearsList = new ArrayList<>(List.of(years));
+            if ( yearsList.size() == 1 || yearsList.get(1).equals("")) yearsList.add(1, "-1");
+            Serie serie = new Serie(line[0], arr, Double.valueOf(line[3].replace(",", ".")), Integer.valueOf(yearsList.get(0)), Integer.valueOf(yearsList.get(1)),seasons);
+            med.add(serie);
+        }
+        Singleton.getInstance().insertArray(med);
+
+    }
+
 
 
 

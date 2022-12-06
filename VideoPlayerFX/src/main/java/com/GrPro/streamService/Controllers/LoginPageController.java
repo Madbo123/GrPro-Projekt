@@ -22,7 +22,7 @@ import java.util.Scanner;
 import static com.GrPro.streamService.Utility.Utilities.getFieldInput;
 
 
-public class LoginController {
+public class LoginPageController {
 
     //INFO: Det ser desværre ud til at man bliver nød til at erklære sine felter separat således mht FXML.
     //Ændr endelig hvis bedre måde opdages.
