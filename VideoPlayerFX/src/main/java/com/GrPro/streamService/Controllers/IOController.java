@@ -56,7 +56,7 @@ public class IOController {
 
     // media load metoder
     public static void loadMedia() throws FileNotFoundException {
-        File file0 = new File("src/main/resources/Data/film.txt");
+        File file0 = new File("C:\\Users\\mailx\\Documents\\itu code\\GrPro-Projekt\\VideoPlayerFX\\src\\main\\resources\\Data\\film.txt");
         Scanner s = new Scanner(file0);
         ArrayList<Media> med = new ArrayList<>();
         while(s.hasNextLine()){
@@ -69,7 +69,7 @@ public class IOController {
             Movie movie = new Movie(line[0],arr,Double.valueOf(line[3].replace(",", ".")),Integer.valueOf(line[1].trim()));
             med.add(movie);
         }
-        File file1 = new File("src/main/resources/Data/serier.txt");
+        File file1 = new File("C:\\Users\\mailx\\Documents\\itu code\\GrPro-Projekt\\VideoPlayerFX\\src\\main\\resources\\Data\\serier.txt");
         Scanner s1 = new Scanner(file1);
         while(s1.hasNextLine()) {
             String[] line = s1.nextLine().split(";");

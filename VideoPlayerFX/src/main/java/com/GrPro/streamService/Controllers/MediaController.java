@@ -10,12 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
+import java.io.File;
 import java.io.IOException;
-import javafx.fxml.FXML;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,18 +22,25 @@ import java.util.List;
 public class MediaController {
 
 
-
+    public void initialize() throws IOException {
+        System.out.println("Initialize");
+        AddMediaToFlowpane("", "", "", 0.0, Double.MAX_VALUE, 0, Integer.MAX_VALUE);
+    }
     public void AddMediaToFlowpane(String searchWord, String type, String genre, double ratingMin, double ratingMax, int releaseYearMin, int releaseYearMax) throws IOException {
-        FlowPane flowPane = null;
         List<Media> list = ApplyAllFilters(searchWord, type, genre, ratingMin, ratingMax, releaseYearMin, releaseYearMax);
-        for (Media media : list) {
-            AnchorPane view = FXMLLoader.load(getClass().getResource("Media.fxml"));
+        for (Media media: list) {
+            URL url = new File("VideoPlayerFX/src/main/resources/com/GrPro/streamService/Controllers/Media.fxml").toURI().toURL();
+            System.out.println(url);
+            AnchorPane view = FXMLLoader.load(url);
             ImageView image1 = (ImageView) view.getChildren().get(0);
-            String path = "C:\\Users\\amxur\\OneDrive\\Documents\\ITU\\TestProjects\\JavaFXTest\\src\\main\\resources\\com\\example\\javafxtest\\filmplakater\\" + media.getTitle() + ".jpg";
+            String typePath;
+            if (media.getTypeOfMedia().equals("Movie")) typePath = "filmplakater";
+            else typePath = "serieforsider";
+            String path = "src/main/resources/Data/" + typePath + "/" + media.getTitle() + ".jpg";
             image1.setImage(new Image(path));
             Label label = (Label) view.getChildren().get(1);
             label.setText(media.getTitle());
-            flowPane.getChildren().add(view);
+            FP.getChildren().add(view);
         }
     }
 
