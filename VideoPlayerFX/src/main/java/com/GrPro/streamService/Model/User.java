@@ -19,6 +19,7 @@ public class User implements Serializable {
     private String password;
     private final List<Media> favorites;
 
+
     public User(String displayname, String username, String password) {
         isAdmin = false;
         Id = generateId();
@@ -32,6 +33,7 @@ public class User implements Serializable {
     private String generateId() {
         return UUID.randomUUID().toString().substring(0, 12);
     }
+
     public String getDisplayName() {
         return displayname;
     }

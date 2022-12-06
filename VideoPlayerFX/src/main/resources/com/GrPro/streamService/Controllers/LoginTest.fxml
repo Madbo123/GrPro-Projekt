@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: GREY;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GrPro.streamService.Controllers.LoginTestController">
+   <children>
+      <Label layoutX="187.0" layoutY="48.0" text="Welcome!">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="displaynameText" alignment="CENTER" focusTraversable="false" layoutX="230.0" layoutY="125.0" prefHeight="55.0" prefWidth="140.0" textAlignment="CENTER">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label fx:id="usernameText" alignment="CENTER" focusTraversable="false" layoutX="230.0" layoutY="200.0" prefHeight="55.0" prefWidth="140.0" textAlignment="CENTER">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Button fx:id="ExitButton" alignment="CENTER" focusTraversable="false" layoutX="452.0" layoutY="38.0" minHeight="45.0" minWidth="110.0" mnemonicParsing="false" onAction="#ExitButtonEvent" opacity="0.9" pickOnBounds="false" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 85.782% 45.4976%, #e42a04 0.0%, #e48901 100.0%); -fx-background-radius: 3 3 3 3;" styleClass="ExitButton" stylesheets="@../../../../Assets/GUIassets/ButtonHover.css" text="EXIT" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.3791469194312796">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <effect>
+            <DropShadow height="117.59" radius="59.0275" spread="0.36" width="120.52">
+               <color>
+                  <Color red="0.29605263471603394" blue="0.3552631437778473" opacity="0.800000011920929" />
+               </color>
+            </DropShadow>
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

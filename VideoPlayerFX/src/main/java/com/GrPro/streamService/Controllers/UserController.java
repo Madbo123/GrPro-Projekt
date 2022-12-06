@@ -15,7 +15,7 @@ public class UserController {
 
         try {
             IOController.save_User(user);
-            IOController.save_UUID_Map(user.getUsername(), user.getId());
+            IOController.save_UUID_Map(username, password, user.getId());
         } catch (IOException ioException) {
             System.out.println("IO exception");
         }
