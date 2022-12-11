@@ -27,8 +27,11 @@ public class MediaController {
                 filtered.add(m);
             }
         }
+
         return filtered;
     }
+
+
 
     public static List<Media> FilterByType(List<Media> list, String typeToSortBy) {
         List<Media> filtered = new ArrayList<Media>();
@@ -156,7 +159,27 @@ public class MediaController {
             Collections.sort(genres);
 
         } catch (NullPointerException e) {
-            System.out.println("Error at MediaController. getAllGenres(). Message: " + e.getMessage());
+            System.out.println("Error at MediaController.getAllGenres(). Message: " + e.getMessage());
+        }
+
+        return genres;
+    }
+
+    public static List<String> getAllGenres(List<Media> list) {
+
+        List<String> genres = new ArrayList<>();
+        try {
+
+            for (Media m : list) {
+                for (String s : m.getCategories()) {
+                    if (!genres.contains(s)) genres.add(s);
+                }
+            }
+
+            Collections.sort(genres);
+
+        } catch (NullPointerException e) {
+            System.out.println("Error at MediaController.getAllGenres(List<Media). Message: " + e.getMessage());
         }
 
         return genres;
