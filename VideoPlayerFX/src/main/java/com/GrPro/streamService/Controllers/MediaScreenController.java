@@ -272,7 +272,25 @@ public class MediaScreenController implements Initializable {
         return genres;
     }
 
+    public static List<String> getAllGenres(List<Media> list) {
 
+        List<String> genres = new ArrayList<>();
+        try {
+
+            for (Media m : list) {
+                for (String s : m.getCategories()) {
+                    if (!genres.contains(s)) genres.add(s);
+                }
+            }
+
+            Collections.sort(genres);
+
+        } catch (NullPointerException e) {
+            System.out.println("Error at MediaController.getAllGenres(List<Media). Message: " + e.getMessage());
+        }
+
+        return genres;
+    }
 
 
 

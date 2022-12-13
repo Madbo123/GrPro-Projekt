@@ -65,7 +65,7 @@ public class IOController {
     // media load metoder
     public static void loadMedia() throws FileNotFoundException {
         File file0 = new File("src/main/resources/Data/film.txt");
-        Scanner s = new Scanner(file0);
+        Scanner s = new Scanner(file0,"UTF8");
         ArrayList<Media> med = new ArrayList<>();
 
         while(s.hasNextLine()){
@@ -80,11 +80,9 @@ public class IOController {
         }
 
         File file1 = new File("src/main/resources/Data/serier.txt");
-        Scanner s1 = new Scanner(file1);
-
+        Scanner s1 = new Scanner(file1, "UTF8");
         //Den her bid læser ikke serier.txt
         while(s1.hasNextLine()) {
-
             String[] line = s1.nextLine().split(";");
             for (int i = 0; i < line.length ; i++) {
                 line[i] = line[i].trim();

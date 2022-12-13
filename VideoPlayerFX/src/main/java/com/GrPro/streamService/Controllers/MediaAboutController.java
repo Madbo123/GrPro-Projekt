@@ -49,7 +49,7 @@ public class MediaAboutController {
     public void TestInitialiseAboutPage() {
 
         // This line is for test purposes only
-        Media media = (Media) Singleton.getInstance().getMedia().get(103);
+        Media media = (Media) Singleton.getInstance().getMediaList().get(199);
         activeMedia = media;
 
         // Determines which folder is necessary to look into to find the corresponding poster
@@ -132,7 +132,6 @@ public class MediaAboutController {
         int season = Integer.parseInt(SeasonComboBox.valueProperty().getValue().toString().replaceAll("[a-zA-Z ]", ""));
         int episodesInSeason = ((Serie) activeMedia).getSeasons().get(season - 1);
 
-        System.out.println(episodesInSeason);
 
         HBox hBox =  new HBox();
         for (int i = 0; i < episodesInSeason; i++) {
@@ -152,6 +151,7 @@ public class MediaAboutController {
 
             TextField textField = new TextField("Ep. " + (i+1));
             textField.setPrefWidth(episodeWidth);
+            textField.setEditable(false);
 
             newVBox.getChildren().add(0, imageView);
             newVBox.getChildren().add(1, textField);
