@@ -1,0 +1,74 @@
+
+.ExitButton:hover {
+    -fx-opacity : 0.75;
+}
+
+.LoginButton:hover {
+    -fx-opacity : 0.75;
+}
+
+.CreateAccountButton:hover {
+    -fx-opacity : 0.75;
+}
+
+.SignInGuestButton:hover {
+    -fx-opacity : 0.6;
+}
+
+.CancelAccCreateButton:hover {
+    -fx-opacity : 0.75;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-pref-height : 8px;
+    -fx-alignment : center;
+}
+
+.scroll-bar:vertical {
+    -fx-pref-width : 20px;
+    -fx-background-color :   #1c1c1c;
+    -fx-background-radius : 0;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-opacity : 0.75;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color : #5b5b5b;
+    -fx-background-insets : 0.0, 0.0, 0.0, 0.0;
+    -fx-background-radius : 0;
+}
+
+.scroll-bar:vertical .track {
+    -fx-border-color: transparent;
+}
+
+
+.backArrow:hover {
+    -fx-opacity : 0.75;
+}
+
+
+.openAccMenuButton:hover {
+    -fx-opacity : 0.75;
+}
+
+.mediaPane:hover {
+    -fx-opacity : 0.85;
+}
+
+.menuButton:hover,
+.homeButton:hover,
+.moviesButton:hover,
+.seriesButton:hover {
+    -fx-opacity : 0.7;
+}
+
+.check-box {
+    /* default properties */
+    selected-box-color: black;
+    box-color: black;
+    mark-color: white;
+}

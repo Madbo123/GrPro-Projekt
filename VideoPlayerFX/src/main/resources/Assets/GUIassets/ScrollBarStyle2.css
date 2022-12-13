@@ -1,0 +1,45 @@
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-pref-height : 0px;
+    -fx-alignment : center;
+    -fx-background-color : transparent;
+    -fx-padding : 0;
+}
+
+.scroll-bar:vertical {
+    -fx-pref-width : 8px;
+    -fx-background-color :  transparent;
+    -fx-background-radius : 2;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-opacity : 0.75;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color : #5b5b5b;
+    -fx-background-insets : 0.0, 0.0, 0.0, 0.0;
+    -fx-background-radius : 5;
+}
+
+.scroll-bar:vertical .track {
+    -fx-border-color : transparent;
+}
+
+.check-box .box {
+	-fx-background-color : GREY;
+	-fx-border-radius : 0;
+}
+
+.check-box .mark {
+ 	-fx-shape : "M1.73,12.91 8.1,19.28 22.79,4.59 22.79,1.59 8.1,16.28 1.73,9.91";
+}
+
+.check-box:selected .mark {
+	-fx-background-color : white;
+}
+
+.check-box:selected .box {
+	-fx-background-color : #4c4c4c;
+}
