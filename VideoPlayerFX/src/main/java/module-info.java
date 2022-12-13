@@ -1,6 +1,7 @@
 module com.GrPro.videoplayerfx {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
     requires javafx.media;
 
     requires org.controlsfx.controls;

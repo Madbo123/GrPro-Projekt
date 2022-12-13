@@ -16,11 +16,10 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="CreateAccountBG" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 37.9147%, #1a00ff 0.0%, #ff00db 100.0%);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GrPro.streamService.Controllers.CreateAccountController">
    <children>
       <Pane fx:id="DragArea" onMouseDragged="#DragEvent" onMousePressed="#StartDragEvent" prefHeight="70.0" prefWidth="900.0" />
-      <Button fx:id="CreateAccountButton" focusTraversable="false" layoutX="344.0" layoutY="520.0" maxHeight="45.0" maxWidth="212.0" minHeight="45.0" minWidth="200.0" mnemonicParsing="false" onAction="#CreateAccountButtonEvent" opacity="0.9" pickOnBounds="false" prefHeight="45.0" prefWidth="212.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 85.782% 45.4976%, #e42a04 0.0%, #e48901 100.0%);" styleClass="LoginButton" stylesheets="@../../../../Assets/GUIassets/ButtonHover.css" text="CREATE ACCOUNT" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+      <Button fx:id="CreateAccountButton" focusTraversable="false" layoutX="344.0" layoutY="520.0" maxHeight="45.0" maxWidth="212.0" minHeight="45.0" minWidth="200.0" mnemonicParsing="false" onAction="#CreateAccountButtonEvent" opacity="0.9" pickOnBounds="false" prefHeight="45.0" prefWidth="212.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 85.782% 45.4976%, #e42a04 0.0%, #e48901 100.0%);" styleClass="LoginButton" stylesheets="@../../../../Assets/GUIassets/KatflixStyles.css" text="CREATE ACCOUNT" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
          <font>
             <Font size="22.0" />
          </font>
@@ -83,7 +82,7 @@
             <Cursor fx:constant="TEXT" />
          </cursor>
       </PasswordField>
-      <Button fx:id="CancelAccCreateButton" alignment="CENTER" focusTraversable="false" layoutX="14.0" layoutY="14.0" minHeight="45.0" minWidth="110.0" mnemonicParsing="false" onAction="#CancelAccCreateButton" opacity="0.9" pickOnBounds="false" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 85.782% 45.4976%, #e42a04 0.0%, #e48901 100.0%); -fx-background-radius: 3 3 3 3;" styleClass="CancelAccCreateButton" stylesheets="@../../../../Assets/GUIassets/ButtonHover.css" text="CANCEL" textOverrun="CLIP" wrapText="true">
+      <Button fx:id="CancelAccCreateButton" alignment="CENTER" focusTraversable="false" layoutX="14.0" layoutY="14.0" minHeight="45.0" minWidth="110.0" mnemonicParsing="false" onAction="#CancelAccCreateButton" opacity="0.9" pickOnBounds="false" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 85.782% 45.4976%, #e42a04 0.0%, #e48901 100.0%); -fx-background-radius: 3 3 3 3;" styleClass="CancelAccCreateButton" stylesheets="@../../../../Assets/GUIassets/KatflixStyles.css" text="CANCEL" textOverrun="CLIP" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
@@ -119,7 +118,7 @@
             <Image url="@../../../../Assets/GUIassets/KatIcon.png" />
          </image>
       </ImageView>
-      <Button fx:id="ExitButton" alignment="CENTER" focusTraversable="false" layoutX="776.0" layoutY="14.0" minHeight="45.0" minWidth="110.0" mnemonicParsing="false" onAction="#ExitButtonEvent" opacity="0.9" pickOnBounds="false" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 85.782% 45.4976%, #e42a04 0.0%, #e48901 100.0%); -fx-background-radius: 3 3 3 3;" styleClass="ExitButton" stylesheets="@../../../../Assets/GUIassets/ButtonHover.css" text="EXIT" textOverrun="CLIP" wrapText="true">
+      <Button fx:id="ExitButton" alignment="CENTER" focusTraversable="false" layoutX="776.0" layoutY="14.0" minHeight="45.0" minWidth="110.0" mnemonicParsing="false" onAction="#ExitButtonEvent" opacity="0.9" pickOnBounds="false" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 85.782% 45.4976%, #e42a04 0.0%, #e48901 100.0%); -fx-background-radius: 3 3 3 3;" styleClass="ExitButton" stylesheets="@../../../../Assets/GUIassets/KatflixStyles.css" text="EXIT" textOverrun="CLIP" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>

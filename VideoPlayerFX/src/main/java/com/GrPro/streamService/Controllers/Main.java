@@ -13,15 +13,13 @@ public class Main extends Application {
     @Override
     public void start(Stage startStage) throws Exception {
         IOController.loadMedia();
-        System.out.println(MediaController.ApplyFilters("", "", ""));
-        System.out.println(MediaController.ApplyAllFilters("", "", "", 0,0,0,0));
-        System.out.println(MediaController.getAllGenres());
-        Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("MediaScreen.fxml"));
         startStage.initStyle(StageStyle.UNDECORATED);
-        Scene scene = new Scene(root, 900, 600);
+        Scene scene = new Scene(root);
         startStage.setScene(scene);
         startStage.show();
     }
 
     public static void main(String[] args) { launch(args);}
 }
+

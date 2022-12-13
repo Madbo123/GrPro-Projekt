@@ -38,9 +38,7 @@ public class CreateAccountController {
     private Scene scene;
     private Parent root;
 
-    double x = 0;
-    double y = 0;
-
+    double x, y = 0;
 
 
     public void CreateAccountButtonEvent() throws IOException {

@@ -6,7 +6,7 @@ public class Serie extends Media {
     private int _endedYear;
     private List<Integer> _season;
 
-    public Serie(String title, List<String> categories, double rating, int releaseYear,int _endedYear,List<Integer> _season) {
+    public Serie(String title, List<String> categories, double rating, int releaseYear, int _endedYear, List<Integer> _season) {
         super(title, categories, rating, releaseYear);
         typeOfMedia = "Serie";
         this._endedYear = _endedYear;

@@ -1,5 +1,8 @@
 package com.GrPro.streamService.Model;
 
+import javafx.scene.image.Image;
+
+import java.io.File;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,26 +15,38 @@ public class User implements Serializable {
     //Kun ændr hvis der laves store ændringer til user klassen.
     @Serial
     private static final long serialVersionUID = 111L;
-    private boolean isAdmin;
+
+
+    //Midlertidigt lavet "rank" om til string.
+    private String userRank;
+
     private final String Id;
+
+    //Default userImg - Kan måske sættes til en kat senere?
+    private String userImg = "src/main/resources/Assets/CustomMediaImages/placeholder.jpg";
     public String displayname;
     private String username;
     private String password;
     private final List<Media> favorites;
 
 
-    public User(String displayname, String username, String password) {
-        isAdmin = false;
+    public User(String displayname, String username, String password, String userRank) {
         Id = generateId();
         favorites = new ArrayList<>();
         this.displayname = displayname;
         this.username = username;
         this.password = password;
+        this.userRank = userRank;
     }
+
 
     //UUID gen og getters
     private String generateId() {
         return UUID.randomUUID().toString().substring(0, 12);
+    }
+
+    public String getUserImg() {
+        return new File(userImg).toURI().toString();
     }
 
     public String getDisplayName() {
@@ -41,30 +56,26 @@ public class User implements Serializable {
     public String getUsername() {
         return username;
     }
-
-    private String getPassword() {
-        return password;
-    }
     public String getId() {
         return Id;
     }
 
-
-    //Favorites
-    public List<Media> getFavorites() {
-        return favorites;
+    public String getPermissions() {
+        return userRank;
     }
 
-    public void addFavorite(Media media) {
-        favorites.add(media);
+    //Burde aldrig være behov for den her.
+    private String getPassword() {
+        return password;
     }
 
-    public void removeFavorite(Media media) {
-        favorites.remove(media);
-    }
 
 
     //Setters
+    public void setUserImg(String new_userImg) {
+        userImg = new_userImg;
+    }
+
     public void setUsername(String new_username) {
         username = new_username;
         //save_credentials();
@@ -79,5 +90,28 @@ public class User implements Serializable {
     public void setDisplayname(String new_displayname) {
         displayname = new_displayname;
         System.out.println("New displayname has been set.");
+    }
+
+    public void setUserRank(String new_userRank) {
+        userRank = new_userRank;
+    }
+
+
+
+
+
+
+
+    //Favorites
+    public List<Media> getFavorites() {
+        return favorites;
+    }
+
+    public void addFavorite(Media media) {
+        favorites.add(media);
+    }
+
+    public void removeFavorite(Media media) {
+        favorites.remove(media);
     }
 }

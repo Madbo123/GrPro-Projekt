@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane fx:id="mediaPaneAnchor" prefHeight="209.0" prefWidth="360.0" style="-fx-background-color: #141414; -fx-background-radius: 5 5 5 5;" styleClass="mediaPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GrPro.streamService.Controllers.MediaPaneController">
+    <children>
+      <Polygon layoutX="325.0" layoutY="192.0" points="-12.5, -28.75, -34.5, -28.75, -18.25, -9.75, -23.5, 13.0, -3.0, 2.25, 17.5, 13.0, 12.75, -9.75, 30.5, -28.75, 7.0, -28.75, -3.0, -50.0" scaleX="0.75" scaleY="0.75" stroke="#976c00" strokeWidth="0.8" translateX="7.0" translateY="7.0">
+         <fill>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.9238095283508301" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="0.6000000238418579" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Polygon>
+        <ImageView fx:id="mediaImage" fitHeight="209.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Assets/CustomMediaImages/placeholder.jpg" />
+         </image>
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+      </ImageView>
+        <Label fx:id="mediaTitle" alignment="TOP_CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="150.0" layoutY="9.0" prefHeight="65.0" prefWidth="200.0" text="Media Title" textAlignment="CENTER" textFill="#bfbfbf" wrapText="true">
+         <font>
+            <Font name="DejaVu Sans Bold" size="18.0" />
+         </font></Label>
+      <Text fx:id="mediaRatingAvg" fill="WHITE" layoutX="224.0" layoutY="188.0" stroke="BLACK" strokeWidth="0.5" text="0.0" textAlignment="CENTER" wrappingWidth="41.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <TextFlow fx:id="mediaGenres" layoutX="150.0" layoutY="82.0" prefHeight="55.0" prefWidth="200.0">
+         <padding>
+            <Insets left="2.0" right="2.0" />
+         </padding>
+         <children>
+            <Text fill="#ff8900" lineSpacing="1.0" stroke="WHITE" strokeWidth="0.0" text="Genres: " textAlignment="CENTER" wrappingWidth="30.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </TextFlow>
+      <Text fill="#ff8900" layoutX="150.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Rating: ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+    </children>
+   <effect>
+      <DropShadow height="13.67" radius="6.7" spread="0.4" width="15.13">
+         <color>
+            <Color red="0.5" blue="0.4333333373069763" />
+         </color></DropShadow>
+   </effect>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</AnchorPane>

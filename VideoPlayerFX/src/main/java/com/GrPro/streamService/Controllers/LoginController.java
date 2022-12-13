@@ -3,6 +3,7 @@ package com.GrPro.streamService.Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -43,8 +44,7 @@ public class LoginController {
     private Scene scene;
     private Parent root;
 
-    double x = 0;
-    double y = 0;
+    double x, y = 0;
 
 
 
@@ -115,7 +115,7 @@ public class LoginController {
     }
 
     public void swapToKatflixMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("LoginTest.fxml"));
+        root = FXMLLoader.load(getClass().getResource("MediaScreen.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -131,6 +131,7 @@ public class LoginController {
     }
 
     //Til dragging af vinduet. Henter koords ved start af klik, bruger dem som referencepunkt til at opdatere position.
+
     public void StartDragEvent(MouseEvent event) {
         x = event.getSceneX();
         y = event.getSceneY();

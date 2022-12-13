@@ -1,53 +1,325 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.Double?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0"
-            xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.GrPro.streamService.Controllers.MediaController">
+<AnchorPane fx:id="mediaScreenAnchor" minHeight="900.0" minWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../../../Assets/GUIassets/KatflixStyles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GrPro.streamService.Controllers.MediaScreenController">
    <children>
-      <ToolBar prefHeight="46.0" prefWidth="1206.0">
-        <items>
-            <MenuButton mnemonicParsing="false" text="Categories">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-            </MenuButton>
-          <Button mnemonicParsing="false" text="Movies" />
-            <Button mnemonicParsing="false" text="Series" />
-            <Button mnemonicParsing="false" text="Favorites" />
-            <TextField promptText="search" />
-        </items>
-      </ToolBar>
-      <ScrollBar layoutX="1192.0" layoutY="46.0" orientation="VERTICAL" prefHeight="660.0" prefWidth="14.0" />
-      <FlowPane fx:id="FP" hgap="15.0" layoutY="46.0" prefHeight="660.0" prefWidth="1190.0" style="-fx-background-color: GRAY;" vgap="15.0">
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../Data/filmplakater/filmplakater/12 Angry Men.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../Data/filmplakater/filmplakater/2001 A Space Odyssey.jpg" />
-               </image>
-            </ImageView>
-         </children>
+      <ScrollPane fx:id="mediaScrollPane" fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" minViewportHeight="900.0" minViewportWidth="1600.0" pannable="true" prefHeight="900.0" prefViewportHeight="900.0" prefViewportWidth="1600.0" prefWidth="1600.0" style="-fx-background-color: #1c1c1c;" styleClass="edge-to-edge" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <FlowPane fx:id="mediaFlowPane" alignment="TOP_CENTER" hgap="20.0" prefHeight="834.0" prefWidth="1580.0" style="-fx-background-color: #1e0135;" vgap="20.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="10.0" left="25.0" right="10.0" top="30.0" />
+               </padding>
+               <effect>
+                  <InnerShadow height="35.65" radius="16.5925" width="32.72" />
+               </effect>
+            </FlowPane>
+         </content>
          <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets top="66.0" />
          </padding>
-      </FlowPane>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ScrollPane>
+      <HBox fx:id="toolBar" alignment="CENTER_LEFT" onMouseDragged="#DragEvent" onMousePressed="#StartDragEvent" prefHeight="66.0" prefWidth="1580.0" style="-fx-background-color: #1c1c1c;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <Pane fx:id="openMenuBar" onMouseClicked="#openMenuEvent" prefHeight="65.0" prefWidth="80.0" styleClass="menuButton">
+               <children>
+                  <Pane layoutX="13.0" layoutY="30.0" prefHeight="8.0" prefWidth="55.0" style="-fx-background-color: GREY; -fx-background-radius: 15 15 15 15;" />
+                  <Pane layoutX="13.0" layoutY="13.0" prefHeight="8.0" prefWidth="55.0" style="-fx-background-color: GREY; -fx-background-radius: 15 15 15 15;" />
+                  <Pane layoutX="13.0" layoutY="47.0" prefHeight="8.0" prefWidth="55.0" style="-fx-background-color: GREY; -fx-background-radius: 15 15 15 15;" />
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Pane>
+          <Button fx:id="homeButton" alignment="CENTER" defaultButton="true" focusTraversable="false" mnemonicParsing="false" prefHeight="64.0" prefWidth="125.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" styleClass="homeButton" text="Home" textAlignment="CENTER" textFill="#e1e1e1" translateX="90.0">
+               <font>
+                  <Font name="Corbel" size="30.0" />
+               </font>
+               <effect>
+                  <ColorAdjust brightness="-0.17" />
+               </effect>
+            </Button>
+            <Button fx:id="filterMoviesButton" alignment="CENTER" defaultButton="true" focusTraversable="false" mnemonicParsing="false" onAction="#filterMoviesbutton" prefHeight="64.0" prefWidth="140.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" styleClass="moviesButton" text="Movies" textAlignment="CENTER" textFill="#e1e1e1" translateX="90.0">
+               <font>
+                  <Font name="Corbel" size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="filterSeriesButton" alignment="CENTER" defaultButton="true" focusTraversable="false" mnemonicParsing="false" onAction="#filterSeriesButton" prefHeight="64.0" prefWidth="120.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" styleClass="seriesButton" text="Series" textAlignment="CENTER" textFill="#e1e1e1" translateX="90.0">
+               <font>
+                  <Font name="Corbel" size="30.0" />
+               </font>
+            </Button>
+            <TextField fx:id="mediaSearchField" focusTraversable="false" onKeyPressed="#searchFieldEvent" prefHeight="45.0" prefWidth="400.0" promptText="Search for Titles, Genres, etc" style="-fx-background-color: BLACK; -fx-border-color: GREY;" translateX="150.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TextField>
+            <Pane fx:id="openAccMenuButton" maxHeight="64.0" onMouseClicked="#openAccMenuEvent" prefHeight="64.0" prefWidth="320.0" styleClass="openAccMenuButton" translateX="390.0">
+               <children>
+                  <Label fx:id="toolBarAccNameLabel" alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="290.0" text="Account" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Polygon fill="WHITE" layoutX="305.0" layoutY="43.0" rotate="180.0" scaleX="0.11" scaleY="0.12" stroke="BLACK" strokeType="INSIDE">
+                    <points>
+                      <Double fx:value="-50.0" />
+                      <Double fx:value="40.0" />
+                      <Double fx:value="50.0" />
+                      <Double fx:value="40.0" />
+                      <Double fx:value="0.0" />
+                      <Double fx:value="-60.0" />
+                    </points>
+                  </Polygon>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+      <VBox fx:id="menuBox" disable="true" fillWidth="false" prefHeight="900.0" prefWidth="170.0" spacing="4.0" style="-fx-background-color: #1c1c1c;" visible="false">
+         <children>
+            <Pane prefHeight="75.0" prefWidth="160.0" styleClass="menuButton">
+               <children>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true" x="65.0" y="-15.0">
+                     <image>
+                        <Image url="@../../../../Assets/GUIassets/KatIcon.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+                  <Pane fx:id="closeMenuButton" onMouseClicked="#closeMenuEvent" prefHeight="75.0" prefWidth="80.0" styleClass="menuButton">
+                     <children>
+                        <Pane layoutX="13.0" layoutY="30.0" prefHeight="8.0" prefWidth="55.0" style="-fx-background-color: GREY; -fx-background-radius: 15 15 15 15;" />
+                        <Pane layoutX="13.0" layoutY="13.0" prefHeight="8.0" prefWidth="55.0" style="-fx-background-color: GREY; -fx-background-radius: 15 15 15 15;" />
+                        <Pane layoutX="13.0" layoutY="47.0" prefHeight="8.0" prefWidth="55.0" style="-fx-background-color: GREY; -fx-background-radius: 15 15 15 15;" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <ScrollPane hbarPolicy="NEVER" nodeOrientation="RIGHT_TO_LEFT" pannable="true" prefHeight="280.0" prefWidth="170.0" style="-fx-background-color: #1c1c1c;" stylesheets="@../../../../Assets/GUIassets/ScrollBarStyle2.css">
+               <content>
+                  <VBox prefWidth="170.0" style="-fx-background-color: #3f3f3f;">
+                     <children>
+                        <CheckBox alignment="CENTER_RIGHT" focusTraversable="false" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="170.0" style="-fx-background-color: #1c1c1c;" text="Action" textAlignment="CENTER" textFill="#a256ff" wrapText="true" VBox.vgrow="NEVER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="10.0" right="25.0" />
+                           </padding>
+                        </CheckBox>
+                        <CheckBox alignment="CENTER_RIGHT" focusTraversable="false" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="170.0" style="-fx-background-color: #1c1c1c;" text="Drama" textAlignment="CENTER" textFill="#a256ff" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" right="25.0" />
+                           </padding>
+                        </CheckBox>
+                        <CheckBox alignment="CENTER_RIGHT" focusTraversable="false" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="170.0" style="-fx-background-color: #1c1c1c;" text="Thriller" textAlignment="CENTER" textFill="#a256ff" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" right="25.0" />
+                           </padding>
+                        </CheckBox>
+                        <CheckBox alignment="CENTER_RIGHT" focusTraversable="false" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="170.0" style="-fx-background-color: #1c1c1c;" text="Horror" textAlignment="CENTER" textFill="#a256ff" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" right="25.0" />
+                           </padding>
+                        </CheckBox>
+                        <CheckBox alignment="CENTER_RIGHT" focusTraversable="false" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="170.0" style="-fx-background-color: #1c1c1c;" text="Mystery" textAlignment="CENTER" textFill="#a256ff" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" right="25.0" />
+                           </padding>
+                        </CheckBox>
+                        <CheckBox alignment="CENTER_RIGHT" focusTraversable="false" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="170.0" style="-fx-background-color: #1c1c1c;" text="Romance" textAlignment="CENTER" textFill="#a256ff" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" right="25.0" />
+                           </padding>
+                        </CheckBox>
+                        <CheckBox alignment="CENTER_RIGHT" focusTraversable="false" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="170.0" style="-fx-background-color: #1c1c1c;" text="History" textAlignment="CENTER" textFill="#a256ff" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" right="25.0" />
+                           </padding>
+                        </CheckBox>
+                        <CheckBox alignment="CENTER_RIGHT" focusTraversable="false" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="170.0" style="-fx-background-color: #1c1c1c;" text="Comedy" textAlignment="CENTER" textFill="#a256ff" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" right="25.0" />
+                           </padding>
+                        </CheckBox>
+                        <CheckBox alignment="CENTER_RIGHT" focusTraversable="false" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="170.0" style="-fx-background-color: #1c1c1c;" text="Krimi" textAlignment="CENTER" textFill="#a256ff" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" right="25.0" />
+                           </padding>
+                        </CheckBox>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+               </content>
+               <VBox.margin>
+                  <Insets top="70.0" />
+               </VBox.margin>
+               <effect>
+                  <ColorAdjust brightness="0.05" />
+               </effect>
+            </ScrollPane>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <VBox fx:id="accMenuBox" alignment="TOP_CENTER" disable="true" fillWidth="false" layoutX="1400.0" prefHeight="900.0" prefWidth="200.0" style="-fx-background-color: #1c1c1c;" visible="false">
+         <children>
+            <Pane fx:id="closeAccMenuButton" onMouseClicked="#closeAccMenuEvent" prefHeight="66.0" prefWidth="200.0" styleClass="backArrow">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+               <children>
+                  <ImageView fitHeight="75.0" fitWidth="90.0" layoutX="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Assets/GUIassets/BackArrowIcon.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="18.8" radius="8.9" spread="0.15" width="18.8">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" opacity="0.2557252049446106" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+            <Pane fx:id="userImageButton" prefHeight="150.0" prefWidth="140.0" VBox.vgrow="NEVER">
+               <children>
+                  <Circle blendMode="SRC_ATOP" fill="#dadadafa" layoutX="70.0" layoutY="70.0" radius="60.0" stroke="#ee00ff7f" strokeMiterLimit="0.0" strokeType="INSIDE">
+                     <effect>
+                        <DropShadow height="28.33" radius="13.2975" spread="0.18" width="26.86">
+                           <color>
+                              <Color red="1.0" blue="0.8833333253860474" opacity="0.9580152630805969" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Circle>
+                  <Circle fx:id="userImageCircle" blendMode="SRC_ATOP" fill="WHITE" layoutX="70.0" layoutY="70.0" radius="60.0" stroke="#ee00ffcd" strokeMiterLimit="0.0" strokeType="INSIDE" />
+               </children>
+            </Pane>
+            <Label fx:id="accDisplaynameLabel" alignment="TOP_CENTER" focusTraversable="false" prefHeight="40.0" prefWidth="160.0" text="DISPLAYNAME" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="accUsernameLabel" alignment="TOP_CENTER" focusTraversable="false" prefHeight="30.0" prefWidth="160.0" text="USERNAME" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="50.0" />
+               </VBox.margin>
+            </Label>
+            <VBox fx:id="accManagementBox" fillWidth="false" prefHeight="205.0" prefWidth="200.0" VBox.vgrow="NEVER">
+               <children>
+                  <PasswordField fx:id="changePasswordField" prefHeight="25.0" prefWidth="150.0" promptText="Enter New Password">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <PasswordField fx:id="changePasswordFieldConf" prefHeight="25.0" prefWidth="150.0" promptText="Confirm New Password">
+                     <VBox.margin>
+                        <Insets bottom="70.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <TextField fx:id="changeDisplaynameField" prefHeight="25.0" prefWidth="150.0" promptText="Enter New Displayname">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="changeDisplaynameFieldConf" prefHeight="25.0" prefWidth="150.0" promptText="Confirm New Displayname" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+            </VBox>
+            <Button fx:id="LogOutButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="150.0" style="-fx-background-color: radial-gradient(focus-angle 0.0deg, focus-distance 0.0% , center 50.0% 50.0%, radius 79.8851%, #fc99ff 0.0%, #d633ff 100.0%);" text="Log Out" textFill="#515151">
+               <font>
+                  <Font size="26.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="230.0" />
+               </VBox.margin>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
