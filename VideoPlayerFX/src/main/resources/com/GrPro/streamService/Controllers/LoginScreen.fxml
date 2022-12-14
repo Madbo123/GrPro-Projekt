@@ -97,7 +97,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="SignGuestButton" alignment="CENTER" layoutX="351.0" layoutY="533.0" minHeight="45.0" minWidth="200.0" mnemonicParsing="false" opacity="0.9" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 0; -fx-background-color: TRANSPARENT;" styleClass="SignInGuestButton" stylesheets="@../../../../Assets/GUIassets/KatflixStyles.css" text="SIGN IN AS GUEST" textFill="WHITE" textOverrun="CLIP" wrapText="true">
+      <Button fx:id="SignGuestButton" alignment="CENTER" layoutX="351.0" layoutY="533.0" minHeight="45.0" minWidth="200.0" mnemonicParsing="false" onAction="#LoginAsGuestEvent" opacity="0.9" prefHeight="45.0" prefWidth="200.0" style="-fx-background-radius: 0; -fx-background-color: TRANSPARENT;" styleClass="SignInGuestButton" stylesheets="@../../../../Assets/GUIassets/KatflixStyles.css" text="SIGN IN AS GUEST" textFill="WHITE" textOverrun="CLIP" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>

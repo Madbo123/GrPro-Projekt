@@ -22,7 +22,6 @@ public class IOController {
 
 
     public static void load_User(String IdKey) throws IOException, ClassNotFoundException {
-        //Bedre checks igen
         FileInputStream read_user = new FileInputStream(userdataPath + "User-" + IdKey + ".dat");
         ObjectInputStream in_user = new ObjectInputStream(read_user);
         currentUser = (User) in_user.readObject();
@@ -33,23 +32,26 @@ public class IOController {
 
 
     public static void save_User(User user) throws IOException {
-        //Bedre checks til bruger probs.
-        FileOutputStream write_user = new FileOutputStream(userdataPath + "User-" + user.getId() + ".dat");
-        ObjectOutputStream out_user = new ObjectOutputStream(write_user);
-        out_user.writeObject(user);
-        out_user.close();
-        write_user.close();
+        if (!currentUser.getUserRank().equals("Guest")) {
+            FileOutputStream write_user = new FileOutputStream(userdataPath + "User-" + user.getId() + ".dat");
+            ObjectOutputStream out_user = new ObjectOutputStream(write_user);
+            out_user.writeObject(user);
+            out_user.close();
+            write_user.close();
+        }
     }
 
 
     public static void save_UUID_Map(String username, String password, String UUID) {
         //Der mangler funktionalitet til at slette en bruger igen.
-        try {
-            FileWriter write_UUID = new FileWriter(userdataPath + "UUID_MAP.dat", true);
-            write_UUID.append(username + " " + password + " " + UUID + "\n");
-            write_UUID.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (!currentUser.getUserRank().equals("Guest")) {
+            try {
+                FileWriter write_UUID = new FileWriter(userdataPath + "UUID_MAP.dat", true);
+                write_UUID.append(username + " " + password + " " + UUID + "\n");
+                write_UUID.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -65,7 +67,7 @@ public class IOController {
     // media load metoder
     public static void loadMedia() throws FileNotFoundException {
         File file0 = new File("src/main/resources/Data/film.txt");
-        Scanner s = new Scanner(file0);
+        Scanner s = new Scanner(file0,"UTF8");
         ArrayList<Media> med = new ArrayList<>();
 
         while(s.hasNextLine()){
@@ -80,11 +82,9 @@ public class IOController {
         }
 
         File file1 = new File("src/main/resources/Data/serier.txt");
-        Scanner s1 = new Scanner(file1);
-
+        Scanner s1 = new Scanner(file1, "UTF8");
         //Den her bid læser ikke serier.txt
         while(s1.hasNextLine()) {
-
             String[] line = s1.nextLine().split(";");
             for (int i = 0; i < line.length ; i++) {
                 line[i] = line[i].trim();

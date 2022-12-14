@@ -1,15 +1,26 @@
 package com.GrPro.streamService.Model;
 
+import java.io.File;
 import java.util.List;
 
 public class Serie extends Media {
-    int endedYear;
-    List<Integer> season;
+    private int endedYear;
+    private List<Integer> season;
 
-    public Serie(String title, List<String> categories, double rating, int releaseYear, int _endedYear, List<Integer> _season) {
+    private List<File> episodes;
+
+    public Serie(String title, List<String> categories, double rating, int releaseYear, int endedYear, List<Integer> season) {
         super(title, categories, rating, releaseYear);
         typeOfMedia = "Serie";
-        this.endedYear = _endedYear;
-        this.season  = _season;
+        this.endedYear = endedYear;
+        this.season  = season;
     }
+
+    public List<Integer> getSeasons() { return season; }
+
+    //Ikke funktionel, da vi ikke rent faktisk har mediefiler til serierne.
+    public List<File> getEpisodes() {
+        return episodes;
+    }
+    public int getEndedYear() { return endedYear; }
 }

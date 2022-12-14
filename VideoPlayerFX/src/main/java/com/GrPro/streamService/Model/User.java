@@ -60,7 +60,7 @@ public class User implements Serializable {
         return Id;
     }
 
-    public String getPermissions() {
+    public String getUserRank() {
         return userRank;
     }
 

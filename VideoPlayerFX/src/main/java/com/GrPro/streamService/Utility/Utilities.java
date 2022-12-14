@@ -15,7 +15,7 @@ public class Utilities {
         return cleanInput(field.getText());
     }
 
-    private static String cleanInput(String input) {
+    public static String cleanInput(String input) {
         return input.replaceAll("[^A-Za-z0-9]", "");
     }
 

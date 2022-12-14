@@ -41,7 +41,7 @@ public class CreateAccountController {
     double x, y = 0;
 
 
-    public void CreateAccountButtonEvent() throws IOException {
+    public void CreateAccountButtonEvent(ActionEvent event) throws IOException {
         String displayname = getFieldInput(displaynameField);
         String username = getFieldInput(usernameField);
         String password = getFieldInput(passwordField);
@@ -50,6 +50,7 @@ public class CreateAccountController {
             if (duplicateUsernameCheck(username)) {
                 AccCreatedLabel.setVisible(true);
                 IOController.create_Account(displayname, username, password);
+                swapToLoginScreen(event);
             }
         }
     }
@@ -140,7 +141,13 @@ public class CreateAccountController {
     }
 
 
-
+    public void swapToLoginScreen(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     public void hideFeedbackLabel(KeyEvent input) {
         TextField field = (TextField) input.getTarget();
@@ -155,11 +162,7 @@ public class CreateAccountController {
     }
 
     public void CancelAccCreateButton(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        swapToLoginScreen(event);
     }
 
     public void ExitButtonEvent() {

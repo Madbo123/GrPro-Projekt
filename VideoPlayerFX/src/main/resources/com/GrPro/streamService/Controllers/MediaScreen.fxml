@@ -17,7 +17,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
@@ -48,7 +47,7 @@
             <Insets />
          </opaqueInsets>
       </ScrollPane>
-      <HBox fx:id="toolBar" alignment="CENTER_LEFT" onMouseDragged="#DragEvent" onMousePressed="#StartDragEvent" prefHeight="66.0" prefWidth="1580.0" style="-fx-background-color: #1c1c1c;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0">
+      <AnchorPane fx:id="toolBar" onMouseDragged="#DragEvent" onMousePressed="#StartDragEvent" prefHeight="66.0" prefWidth="1600.0" style="-fx-background-color: #1c1c1c;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <Pane fx:id="openMenuBar" onMouseClicked="#openMenuEvent" prefHeight="65.0" prefWidth="80.0" styleClass="menuButton">
                <children>
@@ -56,11 +55,8 @@
                   <Pane layoutX="13.0" layoutY="13.0" prefHeight="8.0" prefWidth="55.0" style="-fx-background-color: GREY; -fx-background-radius: 15 15 15 15;" />
                   <Pane layoutX="13.0" layoutY="47.0" prefHeight="8.0" prefWidth="55.0" style="-fx-background-color: GREY; -fx-background-radius: 15 15 15 15;" />
                </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
             </Pane>
-          <Button fx:id="homeButton" alignment="CENTER" defaultButton="true" focusTraversable="false" mnemonicParsing="false" prefHeight="64.0" prefWidth="125.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" styleClass="homeButton" text="Home" textAlignment="CENTER" textFill="#e1e1e1" translateX="90.0">
+            <Button fx:id="homeButton" alignment="CENTER" defaultButton="true" focusTraversable="false" layoutX="170.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="64.0" prefWidth="125.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" styleClass="homeButton" text="Home" textAlignment="CENTER" textFill="#e1e1e1">
                <font>
                   <Font name="Corbel" size="30.0" />
                </font>
@@ -68,49 +64,56 @@
                   <ColorAdjust brightness="-0.17" />
                </effect>
             </Button>
-            <Button fx:id="filterMoviesButton" alignment="CENTER" defaultButton="true" focusTraversable="false" mnemonicParsing="false" onAction="#filterMoviesbutton" prefHeight="64.0" prefWidth="140.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" styleClass="moviesButton" text="Movies" textAlignment="CENTER" textFill="#e1e1e1" translateX="90.0">
+            <Button fx:id="filterMoviesButton" alignment="CENTER" defaultButton="true" focusTraversable="false" layoutX="295.0" mnemonicParsing="false" onAction="#filterMoviesbutton" prefHeight="64.0" prefWidth="140.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" styleClass="moviesButton" text="Movies" textAlignment="CENTER" textFill="#e1e1e1">
                <font>
                   <Font name="Corbel" size="30.0" />
                </font>
             </Button>
-            <Button fx:id="filterSeriesButton" alignment="CENTER" defaultButton="true" focusTraversable="false" mnemonicParsing="false" onAction="#filterSeriesButton" prefHeight="64.0" prefWidth="120.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" styleClass="seriesButton" text="Series" textAlignment="CENTER" textFill="#e1e1e1" translateX="90.0">
+            <Button fx:id="filterSeriesButton" alignment="CENTER" defaultButton="true" focusTraversable="false" layoutX="435.0" mnemonicParsing="false" onAction="#filterSeriesButton" prefHeight="64.0" prefWidth="120.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" styleClass="seriesButton" text="Series" textAlignment="CENTER" textFill="#e1e1e1">
                <font>
                   <Font name="Corbel" size="30.0" />
                </font>
             </Button>
-            <TextField fx:id="mediaSearchField" focusTraversable="false" onKeyPressed="#searchFieldEvent" prefHeight="45.0" prefWidth="400.0" promptText="Search for Titles, Genres, etc" style="-fx-background-color: BLACK; -fx-border-color: GREY;" translateX="150.0">
+            <TextField fx:id="mediaSearchField" focusTraversable="false" layoutX="595.0" layoutY="10.0" maxHeight="45.0" maxWidth="600.0" onKeyTyped="#searchFieldEvent" prefHeight="45.0" prefWidth="400.0" promptText="Search for Titles, Genres, etc" style="-fx-background-color: BLACK; -fx-border-color: GREY;" AnchorPane.leftAnchor="595.0" AnchorPane.rightAnchor="605.0">
                <font>
                   <Font size="20.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
             </TextField>
-            <Pane fx:id="openAccMenuButton" maxHeight="64.0" onMouseClicked="#openAccMenuEvent" prefHeight="64.0" prefWidth="320.0" styleClass="openAccMenuButton" translateX="390.0">
+            <Button fx:id="FavoritesButton" layoutX="1015.0" mnemonicParsing="false" onAction="#favoritesButton" prefHeight="64.0" prefWidth="155.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" text="Favorites" textFill="#e1e1e1" AnchorPane.rightAnchor="430.0">
+               <font>
+                  <Font name="Corbel" size="30.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="25.0" fitWidth="40.0" layoutX="1155.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="420.0">
+               <image>
+                  <Image url="@../../../../Assets/CustomMediaImages/star.png" />
+               </image>
+            </ImageView>
+            <Pane fx:id="openAccMenuButton" layoutX="1295.0" maxHeight="64.0" onMouseClicked="#openAccMenuEvent" prefHeight="64.0" prefWidth="280.0" styleClass="openAccMenuButton" AnchorPane.rightAnchor="25.0">
                <children>
-                  <Label fx:id="toolBarAccNameLabel" alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="290.0" text="Account" textFill="WHITE" wrapText="true">
+                  <Label fx:id="toolBarAccNameLabel" alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="250.0" text="Account" textFill="WHITE" wrapText="true">
                      <font>
-                        <Font size="26.0" />
+                        <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Polygon fill="WHITE" layoutX="305.0" layoutY="43.0" rotate="180.0" scaleX="0.11" scaleY="0.12" stroke="BLACK" strokeType="INSIDE">
-                    <points>
-                      <Double fx:value="-50.0" />
-                      <Double fx:value="40.0" />
-                      <Double fx:value="50.0" />
-                      <Double fx:value="40.0" />
-                      <Double fx:value="0.0" />
-                      <Double fx:value="-60.0" />
-                    </points>
+                  <Polygon fill="WHITE" layoutX="265.0" layoutY="44.0" rotate="180.0" scaleX="0.11" scaleY="0.12" stroke="BLACK" strokeType="INSIDE">
+                     <points>
+                        <Double fx:value="-50.0" />
+                        <Double fx:value="40.0" />
+                        <Double fx:value="50.0" />
+                        <Double fx:value="40.0" />
+                        <Double fx:value="0.0" />
+                        <Double fx:value="-60.0" />
+                     </points>
                   </Polygon>
                </children>
             </Pane>
          </children>
-      </HBox>
-      <VBox fx:id="menuBox" disable="true" fillWidth="false" prefHeight="900.0" prefWidth="170.0" spacing="4.0" style="-fx-background-color: #1c1c1c;" visible="false">
+      </AnchorPane>
+      <VBox fx:id="menuBox" disable="true" fillWidth="false" prefHeight="900.0" prefWidth="170.0" spacing="4.0" style="-fx-background-color: #1c1c1c;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane prefHeight="75.0" prefWidth="160.0" styleClass="menuButton">
                <children>
@@ -228,12 +231,9 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <VBox fx:id="accMenuBox" alignment="TOP_CENTER" disable="true" fillWidth="false" layoutX="1400.0" prefHeight="900.0" prefWidth="200.0" style="-fx-background-color: #1c1c1c;" visible="false">
+      <AnchorPane fx:id="accMenuBox" disable="true" layoutX="1400.0" prefHeight="900.0" prefWidth="200.0" style="-fx-background-color: #1c1c1c;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane fx:id="closeAccMenuButton" onMouseClicked="#closeAccMenuEvent" prefHeight="66.0" prefWidth="200.0" styleClass="backArrow">
-               <VBox.margin>
-                  <Insets bottom="15.0" />
-               </VBox.margin>
                <children>
                   <ImageView fitHeight="75.0" fitWidth="90.0" layoutX="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -254,8 +254,11 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <padding>
+                  <Insets bottom="40.0" />
+               </padding>
             </Pane>
-            <Pane fx:id="userImageButton" prefHeight="150.0" prefWidth="140.0" VBox.vgrow="NEVER">
+            <Pane fx:id="userImageButton" layoutX="30.0" layoutY="80.0" prefHeight="150.0" prefWidth="140.0">
                <children>
                   <Circle blendMode="SRC_ATOP" fill="#dadadafa" layoutX="70.0" layoutY="70.0" radius="60.0" stroke="#ee00ff7f" strokeMiterLimit="0.0" strokeType="INSIDE">
                      <effect>
@@ -268,58 +271,48 @@
                   </Circle>
                   <Circle fx:id="userImageCircle" blendMode="SRC_ATOP" fill="WHITE" layoutX="70.0" layoutY="70.0" radius="60.0" stroke="#ee00ffcd" strokeMiterLimit="0.0" strokeType="INSIDE" />
                </children>
+               <padding>
+                  <Insets bottom="20.0" />
+               </padding>
             </Pane>
-            <Label fx:id="accDisplaynameLabel" alignment="TOP_CENTER" focusTraversable="false" prefHeight="40.0" prefWidth="160.0" text="DISPLAYNAME" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Label fx:id="accDisplaynameLabel" alignment="TOP_CENTER" focusTraversable="false" layoutX="20.0" layoutY="230.0" prefHeight="40.0" prefWidth="160.0" text="DISPLAYNAME" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="accUsernameLabel" alignment="TOP_CENTER" focusTraversable="false" prefHeight="30.0" prefWidth="160.0" text="USERNAME" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="accUsernameLabel" alignment="TOP_CENTER" focusTraversable="false" layoutX="20.0" layoutY="270.0" prefHeight="30.0" prefWidth="160.0" text="USERNAME" textAlignment="CENTER" textFill="#ffffff9a">
                <font>
                   <Font size="14.0" />
                </font>
-               <VBox.margin>
-                  <Insets bottom="50.0" />
-               </VBox.margin>
             </Label>
-            <VBox fx:id="accManagementBox" fillWidth="false" prefHeight="205.0" prefWidth="200.0" VBox.vgrow="NEVER">
+            <Button fx:id="changePassButton" layoutY="340.0" mnemonicParsing="false" onAction="#cPassEvent" prefHeight="50.0" prefWidth="200.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #161616; -fx-border-color: GREY; -fx-border-width: 1 0 1 0;" text="CHANGE PASSWORD" textFill="#ff8cf5b2">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="changeDNButton" layoutY="389.0" mnemonicParsing="false" onAction="#cDNEvent" prefHeight="50.0" prefWidth="200.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #161616; -fx-border-color: GREY; -fx-border-width: 1 0 1 0;" text="CHANGE DISPLAYNAME" textFill="#ff8cf5b2">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <AnchorPane fx:id="accManagementBox" layoutY="450.0" prefHeight="160.0" prefWidth="200.0">
                <children>
-                  <PasswordField fx:id="changePasswordField" prefHeight="25.0" prefWidth="150.0" promptText="Enter New Password">
-                     <VBox.margin>
-                        <Insets bottom="20.0" />
-                     </VBox.margin>
-                  </PasswordField>
-                  <PasswordField fx:id="changePasswordFieldConf" prefHeight="25.0" prefWidth="150.0" promptText="Confirm New Password">
-                     <VBox.margin>
-                        <Insets bottom="70.0" />
-                     </VBox.margin>
-                  </PasswordField>
-                  <TextField fx:id="changeDisplaynameField" prefHeight="25.0" prefWidth="150.0" promptText="Enter New Displayname">
-                     <VBox.margin>
-                        <Insets bottom="20.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <TextField fx:id="changeDisplaynameFieldConf" prefHeight="25.0" prefWidth="150.0" promptText="Confirm New Displayname" />
+                  <TextField fx:id="changeDisplaynameField" alignment="TOP_CENTER" disable="true" layoutX="25.0" prefHeight="25.0" prefWidth="150.0" promptText="Enter New Displayname" style="-fx-background-color: GREY; -fx-background-radius: 0 0 0 0; -fx-border-color: WHITE;" visible="false" />
+                  <TextField fx:id="changeDisplaynameFieldConf" alignment="TOP_CENTER" disable="true" layoutX="25.0" layoutY="45.0" prefHeight="25.0" prefWidth="150.0" promptText="Confirm New Displayname" style="-fx-background-color: GREY; -fx-background-radius: 0 0 0 0; -fx-border-color: WHITE;" visible="false" />
+                  <PasswordField fx:id="changePasswordField" alignment="TOP_CENTER" disable="true" layoutX="25.0" prefHeight="25.0" prefWidth="150.0" promptText="Enter New Password" style="-fx-background-color: GREY; -fx-background-radius: 0 0 0 0; -fx-border-color: WHITE;" visible="false" />
+                  <PasswordField fx:id="changePasswordFieldConf" alignment="TOP_CENTER" disable="true" layoutX="25.0" layoutY="45.0" prefHeight="25.0" prefWidth="150.0" promptText="Confirm New Password" style="-fx-background-color: GREY; -fx-background-radius: 0 0 0 0; -fx-border-color: WHITE;" visible="false" />
+                  <Button fx:id="confirmChangeButton" alignment="CENTER" disable="true" layoutX="30.0" layoutY="120.0" mnemonicParsing="false" onAction="#confChanges" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: GREY; -fx-border-color: WHITE;" text="CONFIRM CHANGE" visible="false" />
                </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets left="25.0" />
-               </padding>
-            </VBox>
-            <Button fx:id="LogOutButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="150.0" style="-fx-background-color: radial-gradient(focus-angle 0.0deg, focus-distance 0.0% , center 50.0% 50.0%, radius 79.8851%, #fc99ff 0.0%, #d633ff 100.0%);" text="Log Out" textFill="#515151">
+            </AnchorPane>
+            <Button fx:id="LogOutButton" layoutX="25.0" mnemonicParsing="false" onAction="#logOutButton" prefHeight="55.0" prefWidth="150.0" style="-fx-background-color: radial-gradient(focus-angle 0.0deg, focus-distance 0.0% , center 50.0% 50.0%, radius 79.8851%, #fc99ff 0.0%, #d633ff 100.0%);" text="Log out" textFill="#515151" AnchorPane.bottomAnchor="45.0">
                <font>
                   <Font size="26.0" />
                </font>
-               <VBox.margin>
-                  <Insets top="230.0" />
-               </VBox.margin>
                <effect>
                   <DropShadow />
                </effect>
             </Button>
          </children>
-      </VBox>
+      </AnchorPane>
    </children>
 </AnchorPane>

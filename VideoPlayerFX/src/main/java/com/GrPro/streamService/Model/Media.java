@@ -1,14 +1,9 @@
 package com.GrPro.streamService.Model;
 
-import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-
 import java.util.List;
 
 public abstract class Media {
+
     private String title = "Title not set";
     private String mediaImage = "src/main/resources/Assets/CustomMediaImages/placeholder.jpg";
     private List<String> categories;

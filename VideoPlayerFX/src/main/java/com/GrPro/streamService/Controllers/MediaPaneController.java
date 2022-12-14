@@ -1,6 +1,8 @@
 package com.GrPro.streamService.Controllers;
 
 import com.GrPro.streamService.Model.Media;
+import com.GrPro.streamService.Model.Serie;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -12,7 +14,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import java.io.File;
-
+import java.util.Properties;
 
 
 public class MediaPaneController {
@@ -33,16 +35,19 @@ public class MediaPaneController {
     private TextFlow mediaGenres;
 
 
-
     public void initializeMediaPane(Media media) {
         mediaTitle.setText(media.getTitle());
         mediaRatingAvg.setText(Double.toString(media.getRating()));
 
         //setMediaBorder(media);
+        setMediaSrc(media);
         setMediaGenres(media);
         setMediaPaneImage(media);
     }
 
+    public void setMediaSrc(Media media) {
+        mediaPaneAnchor.setUserData(media);
+    }
 
     public void setMediaPaneImage(Media media) {
         if (media.getTypeOfMedia().equals("Movie") && new File("src/main/resources/Data/Filmplakater/" + media.getTitle() + ".jpg").exists()) {
@@ -71,7 +76,9 @@ public class MediaPaneController {
         mediaGenres.getChildren().add(temp);
     }
 
+    public void displayMediaInfoEvent(ActionEvent event) {
 
+    }
 
 
     //Sæt gold border til høje ratings

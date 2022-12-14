@@ -15,7 +15,7 @@ public class Main extends Application {
         IOController.loadMedia();
         Parent root = FXMLLoader.load(getClass().getResource("MediaScreen.fxml"));
         startStage.initStyle(StageStyle.UNDECORATED);
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 1600, 900);
         startStage.setScene(scene);
         startStage.show();
     }

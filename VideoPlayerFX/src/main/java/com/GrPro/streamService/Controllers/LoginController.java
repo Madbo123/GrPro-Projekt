@@ -130,6 +130,12 @@ public class LoginController {
         stage.show();
     }
 
+    public void LoginAsGuestEvent(ActionEvent event) throws IOException {
+        System.out.println("Logged in as Guest");
+        UserController.login_as_guest();
+        swapToKatflixMenu(event);
+    }
+
     //Til dragging af vinduet. Henter koords ved start af klik, bruger dem som referencepunkt til at opdatere position.
 
     public void StartDragEvent(MouseEvent event) {

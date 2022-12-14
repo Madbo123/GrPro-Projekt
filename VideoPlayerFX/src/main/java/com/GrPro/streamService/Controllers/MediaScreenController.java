@@ -2,14 +2,17 @@ package com.GrPro.streamService.Controllers;
 
 import com.GrPro.streamService.Model.Media;
 import com.GrPro.streamService.Model.Singleton;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -20,9 +23,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+
+import static com.GrPro.streamService.Controllers.FilterController.*;
 import static com.GrPro.streamService.Controllers.IOController.currentUser;
-import static com.GrPro.streamService.Utility.Utilities.disableNode;
-import static com.GrPro.streamService.Utility.Utilities.enableNode;
+import static com.GrPro.streamService.Controllers.IOController.save_User;
+import static com.GrPro.streamService.Utility.Utilities.*;
 
 
 public class MediaScreenController implements Initializable {
@@ -30,23 +35,23 @@ public class MediaScreenController implements Initializable {
     @FXML
     private Pane openMenuBar, userImageButton, openAccMenuButton, closeAccMenuButton;
     @FXML
-    private Button homeButton, filterMoviesButton, filterSeriesButton;
+    private Button homeButton, filterMoviesButton, filterSeriesButton, favoritesButton, LogOutButton, confirmChangeButton, changePassButton, changeDNButton;
     @FXML
     private PasswordField changePasswordField, changePasswordFieldConf;
     @FXML
-    private TextField mediaSearchField, changeDisplaynameField, changeDisplaynameFieldConf;
+    protected TextField mediaSearchField;
+    @FXML
+    private TextField changeDisplaynameField, changeDisplaynameFieldConf;
     @FXML
     private Label accDisplaynameLabel, accUsernameLabel, toolBarAccNameLabel;
     @FXML
-    private HBox toolBar;
-    @FXML
     private ScrollPane mediaScrollPane;
     @FXML
-    private VBox menuBox, accMenuBox, accManagementBox;
+    private VBox menuBox;
     @FXML
     private Circle userImageCircle;
     @FXML
-    private AnchorPane mediaScreenAnchor;
+    private AnchorPane mediaScreenAnchor, toolBar, accMenuBox, accManagementBox;
     @FXML
     private FlowPane mediaFlowPane;
 
@@ -85,8 +90,6 @@ public class MediaScreenController implements Initializable {
         }
     }
 
-
-
     public void InitUserData() {
         //TESTFUNKTION : Image userImg = new Image(new File("src/main/resources/Assets/CustomMediaImages/placeholder.jpg").toURI().toString());
         UserController.currentUserNullFailsafe();
@@ -104,151 +107,86 @@ public class MediaScreenController implements Initializable {
         AccManagement();
     }
 
+    //public void updateFilter()
+
+    public void updateMediaDisplay() {
+        List<Media> FilterResult = FilterController.FilterMedia();
+
+        for (Node mediaPane : mediaFlowPane.getChildren()) {
+            if (FilterResult.contains((Media)mediaPane.getUserData())) {
+                enableNode(mediaPane);
+            } else if (!FilterResult.contains((Media)mediaPane.getUserData())) {
+                disableNode(mediaPane);
+            }
+        }
+    }
+
 
 
     public void searchFieldEvent(KeyEvent input) {
-        if (input.getCode() == KeyCode.ENTER) {
-            //Søger via enter key. Kan generaliseres til søgning per input.
-        }
-    }
-
-
-    public void FilterMedia(String searchWord, String type, String genre, double ratingMin, double ratingMax, int releaseYearMin, int releaseYearMax) {
-
-        List<String> filterList = new ArrayList<>();
-        for (Media media : ApplyAllFilters(searchWord, type, genre, ratingMin, ratingMax, releaseYearMin, releaseYearMax)) {
-            filterList.add(media.getTitle());
-        }
-
-
-        for (Node mediaPane : mediaFlowPane.getChildren()) {
-            if (!filterList.contains(mediaPane.getId())) {
-                //System.out.println("Media mismatch: " + mediaPane.getId());
-                disableNode(mediaPane);
-            } else if (filterList.contains(mediaPane.getId())) {
-                //System.out.println("Media match: " + mediaPane.getId());
-                enableNode(mediaPane);
-            }
-        }
+        searchWord = mediaSearchField.getText();
+        updateMediaDisplay();
     }
 
 
 
 
 
-
-
-
-    public static List<Media> FilterByTitle(List<Media> list, String searchWord) {
-        List<Media> filtered = new ArrayList<>();
-
-        for (Media m : list) {
-            if (m.getTitle().toLowerCase().contains(searchWord.toLowerCase())) {
-                filtered.add(m);
-            }
+    public void homeButton() {
+        if (!type.equals("")) {
+            dimButton(homeButton);
+            type = "";
         }
-        return filtered;
+        updateMediaDisplay();
     }
-
-    public static List<Media> FilterByType(List<Media> list, String typeToSortBy) {
-        List<Media> filtered = new ArrayList<>();
-
-        for (Media m : list) {
-            if (m.getTypeOfMedia().equalsIgnoreCase(typeToSortBy)) {
-                filtered.add(m);
-            }
-        }
-        return filtered;
-    }
-
-    public static List<Media> FilterByGenre(List<Media> list, String genreToSortBy) {
-        List<Media> filtered = new ArrayList<>();
-
-        for (Media m : list) {
-            if (m.getCategories().contains(genreToSortBy)) {
-                filtered.add(m);
-            }
-        }
-        return filtered;
-    }
-
-    public static List<Media> FilterByRating(List<Media> list, double min, double max) {
-        List<Media> filtered = new ArrayList<>();
-
-        for (Media m : list) {
-            if (m.getRating() > min && m.getRating() < max) {
-                filtered.add(m);
-            }
-        }
-
-        return filtered;
-    }
-
-    public static List<Media> FilterByRelease(List<Media> list, int min, int max) {
-        List<Media> filtered = new ArrayList<>();
-
-        for (Media m : list) {
-            if (m.getReleaseYear() > min && m.getReleaseYear() < max) {
-                filtered.add(m);
-            }
-        }
-
-        return filtered;
-    }
-    
-    public static List<Media> ApplyAllFilters(String searchWord, String type, String genre, double ratingMin, double ratingMax, int releaseYearMin, int releaseYearMax) {
-        List<Media> copiedMediaList = new ArrayList<>(Singleton.getInstance().getMediaList());
-
-        if (searchWord != null && !searchWord.equals("")) {
-            copiedMediaList = FilterByTitle(copiedMediaList, searchWord);
-            System.out.println("Applied Filter: SearchWord");
-        }
-        if (type.equals("Movie")  || type.equals("Serie")) {
-            copiedMediaList = FilterByType(copiedMediaList, type);
-            System.out.println("Applied Filter: Type");
-        }
-        if (genre != null && !genre.equals("")) {
-            copiedMediaList = FilterByGenre(copiedMediaList, genre);
-            System.out.println("Applied Filter: Genre");
-        }
-        if (ratingMax >= ratingMin && ratingMax > 0 && ratingMax <= 10) {
-            copiedMediaList = FilterByRating(copiedMediaList, ratingMin, ratingMax);
-            System.out.println("Applied Filter: Rating");
-        }
-        if (releaseYearMax >= releaseYearMin && releaseYearMin >= 0 && releaseYearMax > 0) {
-            copiedMediaList = FilterByRelease(copiedMediaList, releaseYearMin, releaseYearMax);
-            System.out.println("Applied Filter: Release Year");
-        }
-
-
-        return copiedMediaList;
-    }
-
-
-
 
     public void filterMoviesbutton() {
-        //Filter for film
-        FilterMedia("", "Movie", "", 0, 10.0, 0, Integer.MAX_VALUE);
+        if (!type.equals("Movie")) {
+            dimButton(filterMoviesButton);
+            type = "Movie";
+        }
+        updateMediaDisplay();
     }
 
     public void filterSeriesButton() {
-        //Filter for serier
-        FilterMedia("", "Serie", "", 0, Double.MAX_VALUE, 0, Integer.MAX_VALUE);
-    }
-
-
-    public void ShowMedia(ArrayList<Media> mediaList){
-
-        for( int i = 0; i < mediaList.size(); i++) {
-
-            Image image = new Image("src/main/resources/Filmplakater/" + mediaList.get(i).getTitle() + ".jpg");
-            ImageView imv = new ImageView(image);
-            mediaFlowPane.getChildren().add(imv);
+        if (!type.equals("Serie")) {
+            dimButton(filterSeriesButton);
+            type = "Serie";
         }
+        updateMediaDisplay();
+    }
+
+    //Fav display her
+    public void favoritesButton() {
+        System.out.println("Test af favs");
 
 
     }
+
+    //Vis aktive filterknap
+    public void dimButton(Button button) {
+        button.setEffect(new ColorAdjust(0, 0, -0.17, 0));
+
+        String buttonName = button.getText();
+
+        switch (buttonName) {
+            case "Home" -> {
+                filterMoviesButton.setEffect(null);
+                filterSeriesButton.setEffect(null);
+            }
+            case "Movies" -> {
+                homeButton.setEffect(null);
+                filterSeriesButton.setEffect(null);
+            }
+            case "Series" -> {
+                homeButton.setEffect(null);
+                filterMoviesButton.setEffect(null);
+            }
+        }
+    }
+
+
+
 
     public static List<String> getAllGenres() {
 
@@ -272,7 +210,25 @@ public class MediaScreenController implements Initializable {
         return genres;
     }
 
+    public static List<String> getAllGenres(List<Media> list) {
 
+        List<String> genres = new ArrayList<>();
+        try {
+
+            for (Media m : list) {
+                for (String s : m.getCategories()) {
+                    if (!genres.contains(s)) genres.add(s);
+                }
+            }
+
+            Collections.sort(genres);
+
+        } catch (NullPointerException e) {
+            System.out.println("Error at MediaController.getAllGenres(List<Media). Message: " + e.getMessage());
+        }
+
+        return genres;
+    }
 
 
 
@@ -281,6 +237,7 @@ public class MediaScreenController implements Initializable {
         x = event.getSceneX();
         y = event.getSceneY();
     }
+
     public void DragEvent(MouseEvent event) {
         Stage stage = (Stage) toolBar.getScene().getWindow();
         stage.setX(event.getScreenX() - x);
@@ -298,7 +255,9 @@ public class MediaScreenController implements Initializable {
     public void closeMenuEvent() {
         menuBox.setDisable(true);
         menuBox.setVisible(false);
-        refocusEffect();
+        if (accMenuBox.isDisabled()) {
+            refocusEffect();
+        }
     }
 
     public void openAccMenuEvent() {
@@ -314,7 +273,57 @@ public class MediaScreenController implements Initializable {
         accMenuBox.setVisible(false);
         openAccMenuButton.setDisable(false);
         openAccMenuButton.setVisible(true);
-        refocusEffect();
+        if (menuBox.isDisabled()) {
+            refocusEffect();
+        }
+    }
+
+    public void cPassEvent() {
+        disableNode(changeDisplaynameField);
+        disableNode(changePasswordFieldConf);
+        enableNode(changePasswordField);
+        enableNode(changePasswordFieldConf);
+        enableNode(confirmChangeButton);
+    }
+
+    public void cDNEvent() {
+        disableNode(changePasswordField);
+        disableNode(changePasswordFieldConf);
+        enableNode(changeDisplaynameField);
+        enableNode(changeDisplaynameFieldConf);
+        enableNode(confirmChangeButton);
+    }
+
+    //Det her er verdenens værste funktion, pagtens ark i tekstform.
+    public void confChanges() {
+        if (changeDisplaynameField.isDisabled() && cleanInput(changePasswordField.getText()).equals(cleanInput(changePasswordFieldConf.getText()))
+                    && cleanInput(changePasswordField.getText()).length() > 4) {
+
+            currentUser.setPassword(cleanInput(changePasswordField.getText()));
+            try {
+                save_User(currentUser);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            disableNode(changePasswordField);
+            disableNode(changePasswordFieldConf);
+            disableNode(confirmChangeButton);
+
+        } else if (changePasswordField.isDisabled() && cleanInput(changeDisplaynameField.getText()).equals(cleanInput(changeDisplaynameFieldConf.getText()))
+                    && cleanInput(changeDisplaynameField.getText()).length() > 4) {
+
+            currentUser.setDisplayname(cleanInput(changeDisplaynameField.getText()));
+            try {
+                save_User(currentUser);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            disableNode(changeDisplaynameField);
+            disableNode(changeDisplaynameFieldConf);
+            disableNode(confirmChangeButton);
+        }
     }
 
 
@@ -330,14 +339,21 @@ public class MediaScreenController implements Initializable {
     }
 
     public void AccManagement() {
-        if (currentUser.getPermissions().equals("Guest")) {
+        if (currentUser.getUserRank().equals("Guest")) {
             accManagementBox.setDisable(true);
             userImageButton.setDisable(true);
-            changePasswordField.setPromptText("Disabled in Guest Mode");
-            changePasswordFieldConf.setPromptText("Disabled in Guest Mode");
-            changeDisplaynameField.setPromptText("Disabled in Guest Mode");
-            changeDisplaynameFieldConf.setPromptText("Disabled in Guest Mode");
+            changePassButton.setText("Disabled | Guest");
+            changePassButton.setDisable(true);
+            changeDNButton.setText("Disabled | Guest");
+            changeDNButton.setDisable(true);
         }
     }
 
+    public void logOutButton(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
