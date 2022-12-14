@@ -48,6 +48,14 @@
             <Font size="14.0" />
          </font>
       </Text>
+      <ImageView fx:id="favoriteStar" fitHeight="42.0" fitWidth="50.0" layoutX="304.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@star_hollow.png" />
+         </image>
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+      </ImageView>
     </children>
    <effect>
       <DropShadow height="13.67" radius="6.7" spread="0.4" width="15.13">

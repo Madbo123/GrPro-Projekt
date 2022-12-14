@@ -21,12 +21,13 @@ public class IOController {
     }
 
 
-    public static void load_User(String IdKey) throws IOException, ClassNotFoundException {
+    public static User load_User(String IdKey) throws IOException, ClassNotFoundException {
         FileInputStream read_user = new FileInputStream(userdataPath + "User-" + IdKey + ".dat");
         ObjectInputStream in_user = new ObjectInputStream(read_user);
         currentUser = (User) in_user.readObject();
         in_user.close();
         read_user.close();
+        return currentUser;
     }
 
 

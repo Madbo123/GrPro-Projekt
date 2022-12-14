@@ -1,7 +1,7 @@
 package com.GrPro.streamService.Controllers;
 
 import com.GrPro.streamService.Model.Media;
-import com.GrPro.streamService.Model.Serie;
+import com.GrPro.streamService.Model.Singleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,7 +14,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import java.io.File;
-import java.util.Properties;
+import java.io.IOException;
 
 
 public class MediaPaneController {
@@ -34,11 +34,54 @@ public class MediaPaneController {
     @FXML
     private TextFlow mediaGenres;
 
+    @FXML
+    private ImageView favoriteStar;
+    private Media media;
 
-    public void initializeMediaPane(Media media) {
+    @FXML
+    private void initialize() {
+        if (Singleton.getInstance().getUser() != null) {
+            favoriteStar.setPickOnBounds(true);
+        }
+        else favoriteStar.setVisible(false);
+    }
+    
+    public void initializeMediaPane(Media media) throws IOException {
+        this.media = media;
+        if (Singleton.getInstance().getUser() != null) {
+            for (Media m: Singleton.getInstance().getUser().getFavorites()) {
+                if (m.getTitle().equals(this.media.getTitle())) {
+                    this.media.setFavoriteOfCurrentUser(true);
+                    favoriteStar.setImage(new Image(getClass().getResource("star_filled.png").openStream()));
+                }
+            }
+            favoriteStar.setOnMouseClicked(event -> {
+                //kaster en illegalArumentException, men ser ikke ud til at der sker noget med den
+                if (!this.media.getFavoriteOfCurrentUser()) {
+                    Singleton.getInstance().getUser().addFavorite(media);
+                    media.setFavoriteOfCurrentUser(true);
+                    try {
+                        favoriteStar.setImage(new Image(getClass().getResource("star_filled.png").openStream()));
+                        IOController.save_User(Singleton.getInstance().getUser());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                else {
+                    Singleton.getInstance().getUser().removeFavorite(media);
+                    media.setFavoriteOfCurrentUser(false);
+                    try {
+                        favoriteStar.setImage(new Image(getClass().getResource("star_hollow.png").openStream()));
+                        IOController.save_User(Singleton.getInstance().getUser());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                // set favorite or remove favorite
+            });
+        }
         mediaTitle.setText(media.getTitle());
         mediaRatingAvg.setText(Double.toString(media.getRating()));
-
         //setMediaBorder(media);
         setMediaSrc(media);
         setMediaGenres(media);
@@ -80,6 +123,9 @@ public class MediaPaneController {
 
     }
 
+    public void setMedia(Media media) {
+        this.media = media;
+    }
 
     //Sæt gold border til høje ratings
     /*public void setMediaBorder(Media media) {

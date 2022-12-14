@@ -1,8 +1,9 @@
 package com.GrPro.streamService.Model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class Media {
+public abstract class Media implements Serializable {
 
     private String title = "Title not set";
     private String mediaImage = "src/main/resources/Assets/CustomMediaImages/placeholder.jpg";
@@ -10,6 +11,7 @@ public abstract class Media {
     private double rating;
     private int releaseYear;
     protected String typeOfMedia;
+    private Boolean favoriteOfCurrentUser = false;
 
 
 
@@ -35,10 +37,13 @@ public abstract class Media {
 
     public String getTypeOfMedia() {return typeOfMedia;}
 
+    public Boolean getFavoriteOfCurrentUser() {
+        return favoriteOfCurrentUser;
+    }
 
-
-
-
+    public void setFavoriteOfCurrentUser(Boolean favoriteOfCurrentUser) {
+        this.favoriteOfCurrentUser = favoriteOfCurrentUser;
+    }
 
     public void setCategories() {
         //Ekstra

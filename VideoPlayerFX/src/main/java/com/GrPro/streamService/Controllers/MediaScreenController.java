@@ -84,6 +84,7 @@ public class MediaScreenController implements Initializable {
             FXMLLoader mediaPaneLoader = new FXMLLoader(getClass().getResource("Media.fxml"));
             AnchorPane mediaPane = mediaPaneLoader.load();
             MediaPaneController mediaPaneController = mediaPaneLoader.getController();
+//            mediaPaneController.setMedia(media);
             mediaPaneController.initializeMediaPane(media);
             mediaPane.setId(media.getTitle());
             mediaFlowPane.getChildren().add(mediaPane);
@@ -158,9 +159,17 @@ public class MediaScreenController implements Initializable {
 
     //Fav display her
     public void favoritesButton() {
-        System.out.println("Test af favs");
-
-
+        for (Node mediaPane : mediaFlowPane.getChildren()) {
+            for (Media media: Singleton.getInstance().getUser().getFavorites()) {
+                if (media.getTitle().equals(((Media) mediaPane.getUserData()).getTitle())) {
+                    enableNode(mediaPane);
+                    break;
+                }
+                else {
+                    disableNode(mediaPane);
+                }
+            }
+        }
     }
 
     //Vis aktive filterknap

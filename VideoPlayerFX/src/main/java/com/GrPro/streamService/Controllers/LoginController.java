@@ -1,5 +1,6 @@
 package com.GrPro.streamService.Controllers;
 
+import com.GrPro.streamService.Model.Singleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,7 +58,7 @@ public class LoginController {
             if (userdata[0].equals(username) && userdata[1].equals(password)) {
                 System.out.println("Login succeeded with credentials: " + userdata[0] + " + " + userdata[1]);
                 try {
-                    IOController.load_User(userdata[2]);
+                    Singleton.getInstance().setUser(IOController.load_User(userdata[2]));
                     return true;
                 } catch (IOException io) {
                     System.out.println("File(s) for the given user could not be found");
