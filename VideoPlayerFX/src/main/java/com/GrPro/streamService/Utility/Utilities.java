@@ -1,9 +1,13 @@
 package com.GrPro.streamService.Utility;
 
+import com.GrPro.streamService.Model.Singleton;
+import com.GrPro.streamService.Model.User;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Utilities {
@@ -29,5 +33,11 @@ public class Utilities {
         node.setDisable(false);
         node.setVisible(true);
         node.setManaged(true);
+    }
+
+    public static void centerStage(Stage stage) {
+        Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((bounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((bounds.getHeight() - stage.getHeight()) / 2);
     }
 }

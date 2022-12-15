@@ -19,14 +19,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
 import static com.GrPro.streamService.Controllers.FilterController.*;
-import static com.GrPro.streamService.Controllers.IOController.currentUser;
 import static com.GrPro.streamService.Controllers.IOController.save_User;
+import static com.GrPro.streamService.Controllers.UserController.*;
 import static com.GrPro.streamService.Utility.Utilities.*;
 
 
@@ -51,11 +53,13 @@ public class MediaScreenController implements Initializable {
     @FXML
     private Circle userImageCircle;
     @FXML
-    private AnchorPane mediaScreenAnchor, toolBar, accMenuBox, accManagementBox;
+    private AnchorPane toolBar, accMenuBox, accManagementBox;
+    @FXML
+    public AnchorPane mediaScreenAnchor;
     @FXML
     private FlowPane mediaFlowPane;
 
-
+    private Media videoMedia;
     double x, y = 0;
 
 
@@ -64,14 +68,13 @@ public class MediaScreenController implements Initializable {
         if (url.equals(getClass().getResource("MediaScreen.fxml"))) {
             System.out.println("Initializing for Media Screen");
             try {
+                currentUserNullFailsafe();
                 InitAllMedia();
                 InitUserData();
                 InitScenePermissions();
             } catch (IOException io) {
                 io.printStackTrace();
             }
-
-            //mediaScreenAnchor.getStylesheets().add(new File("src/main/resources/Assets/GUIassets/KatflixStyles.css").toURI().toString());
         }
     }
 
@@ -84,7 +87,7 @@ public class MediaScreenController implements Initializable {
             FXMLLoader mediaPaneLoader = new FXMLLoader(getClass().getResource("Media.fxml"));
             AnchorPane mediaPane = mediaPaneLoader.load();
             MediaPaneController mediaPaneController = mediaPaneLoader.getController();
-//            mediaPaneController.setMedia(media);
+            //mediaPaneController.setMedia(media);
             mediaPaneController.initializeMediaPane(media);
             mediaPane.setId(media.getTitle());
             mediaFlowPane.getChildren().add(mediaPane);
@@ -95,20 +98,19 @@ public class MediaScreenController implements Initializable {
         //TESTFUNKTION : Image userImg = new Image(new File("src/main/resources/Assets/CustomMediaImages/placeholder.jpg").toURI().toString());
         UserController.currentUserNullFailsafe();
 
-        Image userImg = new Image(currentUser.getUserImg());
+        Image userImg = new Image(getCurrentUser().getUserImg());
         userImageCircle.setFill(new ImagePattern(userImg));
-        accDisplaynameLabel.setText(currentUser.getDisplayName());
-        toolBarAccNameLabel.setText(currentUser.getDisplayName());
+        accDisplaynameLabel.setText(getCurrentUser().getDisplayName());
+        toolBarAccNameLabel.setText(getCurrentUser().getDisplayName());
 
         //Det her er usikkert, men skal forestille en substitut for email-adresse, a la:  @email.com
-        accUsernameLabel.setText(currentUser.getUsername());
+        accUsernameLabel.setText(getCurrentUser().getUsername());
     }
 
     public void InitScenePermissions() {
         AccManagement();
     }
 
-    //public void updateFilter()
 
     public void updateMediaDisplay() {
         List<Media> FilterResult = FilterController.FilterMedia();
@@ -132,7 +134,7 @@ public class MediaScreenController implements Initializable {
 
 
 
-
+    //Nulstiller type filter.
     public void homeButton() {
         if (!type.equals("")) {
             dimButton(homeButton);
@@ -141,6 +143,8 @@ public class MediaScreenController implements Initializable {
         updateMediaDisplay();
     }
 
+
+    //Type filters
     public void filterMoviesbutton() {
         if (!type.equals("Movie")) {
             dimButton(filterMoviesButton);
@@ -157,10 +161,11 @@ public class MediaScreenController implements Initializable {
         updateMediaDisplay();
     }
 
+
     //Fav display her
     public void favoritesButton() {
         for (Node mediaPane : mediaFlowPane.getChildren()) {
-            for (Media media: Singleton.getInstance().getUser().getFavorites()) {
+            for (Media media: getCurrentUser().getFavorites()) {
                 if (media.getTitle().equals(((Media) mediaPane.getUserData()).getTitle())) {
                     enableNode(mediaPane);
                     break;
@@ -308,9 +313,9 @@ public class MediaScreenController implements Initializable {
         if (changeDisplaynameField.isDisabled() && cleanInput(changePasswordField.getText()).equals(cleanInput(changePasswordFieldConf.getText()))
                     && cleanInput(changePasswordField.getText()).length() > 4) {
 
-            currentUser.setPassword(cleanInput(changePasswordField.getText()));
+            getCurrentUser().setPassword(cleanInput(changePasswordField.getText()));
             try {
-                save_User(currentUser);
+                save_User(getCurrentUser());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -322,9 +327,9 @@ public class MediaScreenController implements Initializable {
         } else if (changePasswordField.isDisabled() && cleanInput(changeDisplaynameField.getText()).equals(cleanInput(changeDisplaynameFieldConf.getText()))
                     && cleanInput(changeDisplaynameField.getText()).length() > 4) {
 
-            currentUser.setDisplayname(cleanInput(changeDisplaynameField.getText()));
+            getCurrentUser().setDisplayname(cleanInput(changeDisplaynameField.getText()));
             try {
-                save_User(currentUser);
+                save_User(getCurrentUser());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -348,21 +353,27 @@ public class MediaScreenController implements Initializable {
     }
 
     public void AccManagement() {
-        if (currentUser.getUserRank().equals("Guest")) {
+        if (getCurrentUser().getUserRank().equals("Guest") || getCurrentUser() == null) {
             accManagementBox.setDisable(true);
             userImageButton.setDisable(true);
             changePassButton.setText("Disabled | Guest");
             changePassButton.setDisable(true);
             changeDNButton.setText("Disabled | Guest");
             changeDNButton.setDisable(true);
+            favoritesButton.setText("Disabled | Guest");
+            favoritesButton.setFont(Font.font(16));
+            favoritesButton.setDisable(true);
         }
     }
 
+
     public void logOutButton(ActionEvent event) throws IOException {
+        setUser(null);
         Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        centerStage(stage);
     }
 }

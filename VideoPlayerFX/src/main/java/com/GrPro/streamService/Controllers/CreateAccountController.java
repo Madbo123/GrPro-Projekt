@@ -19,12 +19,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static com.GrPro.streamService.Utility.Utilities.centerStage;
 import static com.GrPro.streamService.Utility.Utilities.getFieldInput;
 
 public class CreateAccountController {
 
     @FXML
-    private Button CancelAccCreateButton, ExitButton;
+    private Button CancelAccCreateButton, ExitButton, CreateAccountButton;
     @FXML
     private Pane DragArea;
     @FXML
@@ -142,11 +143,18 @@ public class CreateAccountController {
 
 
     public void swapToLoginScreen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
+        root = loginLoader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        if (event.getSource().equals(CreateAccountButton)) {
+            LoginController loginController = loginLoader.getController();
+            loginController.loginFeedback("Account created. Please login below.");
+            loginController.setUsernameField(usernameField.getText());
+        }
         stage.show();
+        centerStage(stage);
     }
 
     public void hideFeedbackLabel(KeyEvent input) {

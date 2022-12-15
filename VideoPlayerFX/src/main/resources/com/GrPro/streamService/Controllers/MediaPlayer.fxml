@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: GREY;" stylesheets="@../../../../Assets/GUIassets/KatflixStyles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GrPro.streamService.Controllers.MediaPlayerController">
+   <children>
+      <MediaView fx:id="mediaView" fitHeight="835.0" fitWidth="1600.0" onMouseClicked="#playPauseButton" preserveRatio="false" y="65.0" />
+      <ImageView fx:id="playStatus" disable="true" fitHeight="400.0" fitWidth="400.0" layoutX="600.0" layoutY="250.0" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../../Assets/CustomMediaImages/pause.png" />
+         </image>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </ImageView>
+      <HBox alignment="TOP_CENTER" layoutX="-1.0" minHeight="65.0" minWidth="240.0" prefHeight="65.0" prefWidth="1600.0" style="-fx-background-color: BLACK; -fx-background-radius: 0;">
+         <children>
+            <Label fx:id="mediaName" alignment="CENTER" prefHeight="70.0" prefWidth="1000.0" text="Media Name" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.21666666865348816" blue="1.0" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" blue="0.699999988079071" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+         </children>
+      </HBox>
+      <Slider fx:id="timeSlider" layoutX="100.0" layoutY="846.0" prefHeight="20.0" prefWidth="1400.0" styleClass="videoSlider" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" />
+      <ImageView fx:id="exitVideoButton" fitHeight="83.0" fitWidth="115.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#exitVideo" pickOnBounds="true" preserveRatio="true" translateY="-10.0">
+         <image>
+            <Image url="@../../../../Assets/GUIassets/BackArrowIcon.png" />
+         </image>
+         <effect>
+            <InnerShadow choke="0.15" height="23.93" radius="18.060000000000002" width="50.31">
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </color>
+            </InnerShadow>
+         </effect>
+      </ImageView>
+      <Slider fx:id="volumeSlider" layoutX="1393.0" layoutY="30.0" styleClass="videoSlider" AnchorPane.rightAnchor="67.0" />
+      <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="1544.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0">
+         <image>
+            <Image url="@../../../../Assets/CustomMediaImages/speaker.png" />
+         </image>
+         <effect>
+            <InnerShadow choke="0.05" height="35.66" radius="17.33" width="35.66">
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </color>
+            </InnerShadow>
+         </effect>
+      </ImageView>
+      <Label fx:id="volLabel" alignment="TOP_CENTER" layoutX="1436.0" layoutY="5.0" prefHeight="25.0" prefWidth="55.0" text="Vol" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static com.GrPro.streamService.Controllers.UserController.setUser;
+import static com.GrPro.streamService.Utility.Utilities.centerStage;
 import static com.GrPro.streamService.Utility.Utilities.getFieldInput;
 
 
@@ -58,7 +60,7 @@ public class LoginController {
             if (userdata[0].equals(username) && userdata[1].equals(password)) {
                 System.out.println("Login succeeded with credentials: " + userdata[0] + " + " + userdata[1]);
                 try {
-                    Singleton.getInstance().setUser(IOController.load_User(userdata[2]));
+                    setUser(IOController.load_User(userdata[2]));
                     return true;
                 } catch (IOException io) {
                     System.out.println("File(s) for the given user could not be found");
@@ -115,12 +117,17 @@ public class LoginController {
         LoginFeedbackLabel.setText(msg);
     }
 
+    public void setUsernameField(String input) {
+        usernameField.setText(input);
+    }
+
     public void swapToKatflixMenu(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("MediaScreen.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        centerStage(stage);
     }
 
     public void swapToCreateAccScreen(ActionEvent event) throws IOException {
@@ -129,10 +136,10 @@ public class LoginController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        centerStage(stage);
     }
 
     public void LoginAsGuestEvent(ActionEvent event) throws IOException {
-        System.out.println("Logged in as Guest");
         UserController.login_as_guest();
         swapToKatflixMenu(event);
     }

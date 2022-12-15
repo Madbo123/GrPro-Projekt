@@ -1,10 +1,15 @@
 package com.GrPro.streamService.Model;
 
+import java.io.File;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
 public abstract class Media implements Serializable {
 
+
+    @Serial
+    private static final long serialVersionUID = 222L;
     private String title = "Title not set";
     private String mediaImage = "src/main/resources/Assets/CustomMediaImages/placeholder.jpg";
     private List<String> categories;
@@ -12,6 +17,8 @@ public abstract class Media implements Serializable {
     private int releaseYear;
     protected String typeOfMedia;
     private Boolean favoriteOfCurrentUser = false;
+
+    private File mediaFile = new File("MediaFiles/doggoTestVid.mp4");
 
 
 
@@ -41,12 +48,28 @@ public abstract class Media implements Serializable {
         return favoriteOfCurrentUser;
     }
 
+    public File getMediaFile() {
+        return mediaFile;
+    }
+
+
+
+
+
+
+
+
+    public void setMediaFile(String newMediaFile) {
+        mediaFile = new File("MediaFiles/" + newMediaFile);
+    }
     public void setFavoriteOfCurrentUser(Boolean favoriteOfCurrentUser) {
         this.favoriteOfCurrentUser = favoriteOfCurrentUser;
     }
 
-    public void setCategories() {
+
+    public void setCategories(List<String> newCategories) {
         //Ekstra
+        categories = newCategories;
     }
 
     public void setTitle(String newTitle) {

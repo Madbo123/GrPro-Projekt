@@ -7,12 +7,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane fx:id="mediaPaneAnchor" onMousePressed="#displayMediaInfoEvent" prefHeight="209.0" prefWidth="360.0" style="-fx-background-color: #141414; -fx-background-radius: 5 5 5 5;" styleClass="mediaPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GrPro.streamService.Controllers.MediaPaneController">
+<AnchorPane fx:id="mediaPaneAnchor" onMousePressed="#playMedia" prefHeight="209.0" prefWidth="360.0" style="-fx-background-color: #141414; -fx-background-radius: 5 5 5 5;" styleClass="mediaPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GrPro.streamService.Controllers.MediaPaneController">
     <children>
         <ImageView fx:id="mediaImage" fitHeight="209.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -48,14 +49,26 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <ImageView fx:id="favoriteStar" fitHeight="42.0" fitWidth="50.0" layoutX="304.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@star_hollow.png" />
-         </image>
-         <viewport>
-            <Rectangle2D />
-         </viewport>
-      </ImageView>
+      <Pane fx:id="starPane" layoutX="304.0" layoutY="140.0" onMouseClicked="#favoriteButton">
+         <children>
+            <ImageView fx:id="starHollow" fitHeight="42.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Assets/GUIassets/star_hollow.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+            <ImageView fx:id="starFill" disable="true" fitHeight="42.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../../Assets/GUIassets/star_filled.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </children>
+      </Pane>
     </children>
    <effect>
       <DropShadow height="13.67" radius="6.7" spread="0.4" width="15.13">
