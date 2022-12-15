@@ -1,20 +1,33 @@
 package com.GrPro.streamService.Controllers;
 
 import com.GrPro.streamService.Model.Media;
-import com.GrPro.streamService.Model.Serie;
+import com.GrPro.streamService.Model.Singleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
+
 import java.io.File;
-import java.util.Properties;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Objects;
+
+import static com.GrPro.streamService.Controllers.UserController.getCurrentUser;
+import static com.GrPro.streamService.Utility.Utilities.*;
 
 
 public class MediaPaneController {
@@ -22,9 +35,11 @@ public class MediaPaneController {
     @FXML
     private AnchorPane mediaPaneAnchor;
     @FXML
+    private Pane starPane;
+    @FXML
     private ImageView mediaImage;
 
-    //Kan udvides med mere info hvis der er tid. (Description, director, actors, genres f.eks)
+    //Kan udvides med mere info hvis der er tid. (Description, director, actors, genres f.eks
     @FXML
     private Label mediaTitle, mediaReleaseYear;
 
@@ -34,15 +49,56 @@ public class MediaPaneController {
     @FXML
     private TextFlow mediaGenres;
 
+    @FXML
+    public ImageView starFill;
 
-    public void initializeMediaPane(Media media) {
-        mediaTitle.setText(media.getTitle());
-        mediaRatingAvg.setText(Double.toString(media.getRating()));
+    @FXML
+    private ImageView starHollow;
 
-        //setMediaBorder(media);
+    private Media media;
+
+
+
+    public void initializeMediaPane(Media media) throws IOException {
+        this.media = media;
         setMediaSrc(media);
         setMediaGenres(media);
         setMediaPaneImage(media);
+
+        initFavs();
+        mediaTitle.setText(media.getTitle());
+        mediaRatingAvg.setText(Double.toString(media.getRating()));
+    }
+
+
+
+    public void setFavorite() {
+        media.setFavoriteOfCurrentUser(!media.getFavoriteOfCurrentUser());
+
+        try {
+            if (media.getFavoriteOfCurrentUser()) {
+                getCurrentUser().addFavorite(media);
+                disableNode(starHollow);
+                enableNode(starFill);
+                System.out.println("Added " + media.getTitle() + " to favorites");
+            } else {
+                getCurrentUser().removeFavorite(media);
+                disableNode(starFill);
+                enableNode(starHollow);
+                System.out.println("Removed " + media.getTitle() + " from favorites");
+            }
+            IOController.save_User(getCurrentUser());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+    public void favoriteButton(MouseEvent event) {
+        setFavorite();
     }
 
     public void setMediaSrc(Media media) {
@@ -80,11 +136,45 @@ public class MediaPaneController {
 
     }
 
-
-    //Sæt gold border til høje ratings
-    /*public void setMediaBorder(Media media) {
-        if (media.getRating() > 8.6) {
-            mediaPaneAnchor.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.valueOf("#ffad00"), 27, 0, 0, 0));
+    public void setStars() {
+        for (Media med : getCurrentUser().getFavorites()) {
+            if (med.getTitle().equals(media.getTitle())) {
+                media.setFavoriteOfCurrentUser(true);
+                disableNode(starHollow);
+                enableNode(starFill);
+            }
         }
-    } */
+    }
+
+    public void initFavs() {
+        if (!getCurrentUser().getUserRank().equals("Guest") && getCurrentUser() != null) {
+            setStars();
+        } else {
+            disableNode(starPane);
+        }
+    }
+
+    public void setMedia(Media media) {
+        this.media = media;
+    }
+
+
+
+
+    public void playMedia(MouseEvent event) throws IOException {
+        //DET HER VAR IKKE SJOVT AT FINDE UD AF HVORDAN MAN GJORDE
+
+        FXMLLoader videoLoader = new FXMLLoader(getClass().getResource("MediaPlayer.fxml"));
+        Parent root = videoLoader.load();
+        Scene sceneSave = ((Node)event.getSource()).getScene();
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+
+        MediaPlayerController mediaPlayerController = videoLoader.getController();
+        mediaPlayerController.initializeVideoPlayer(media, sceneSave);
+
+        stage.show();
+        centerStage(stage);
+    }
 }

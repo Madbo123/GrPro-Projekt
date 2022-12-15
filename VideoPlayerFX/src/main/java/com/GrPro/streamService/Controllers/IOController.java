@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.GrPro.streamService.Controllers.UserController.getCurrentUser;
+
 //Reading og writing af brugere foregår via OOS og OIS
 public class IOController {
 
     static final String userdataPath = "src/main/resources/Data/Users/";
-    static User currentUser;
+
 
 
 
@@ -21,18 +23,19 @@ public class IOController {
     }
 
 
-    public static void load_User(String IdKey) throws IOException, ClassNotFoundException {
+    public static User load_User(String IdKey) throws IOException, ClassNotFoundException {
         FileInputStream read_user = new FileInputStream(userdataPath + "User-" + IdKey + ".dat");
         ObjectInputStream in_user = new ObjectInputStream(read_user);
-        currentUser = (User) in_user.readObject();
+        User loadedUser = (User)in_user.readObject();
         in_user.close();
         read_user.close();
+        return loadedUser;
     }
 
 
 
     public static void save_User(User user) throws IOException {
-        if (!currentUser.getUserRank().equals("Guest")) {
+        if (!getCurrentUser().getUserRank().equals("Guest")) {
             FileOutputStream write_user = new FileOutputStream(userdataPath + "User-" + user.getId() + ".dat");
             ObjectOutputStream out_user = new ObjectOutputStream(write_user);
             out_user.writeObject(user);
@@ -44,7 +47,7 @@ public class IOController {
 
     public static void save_UUID_Map(String username, String password, String UUID) {
         //Der mangler funktionalitet til at slette en bruger igen.
-        if (!currentUser.getUserRank().equals("Guest")) {
+        if (!getCurrentUser().getUserRank().equals("Guest")) {
             try {
                 FileWriter write_UUID = new FileWriter(userdataPath + "UUID_MAP.dat", true);
                 write_UUID.append(username + " " + password + " " + UUID + "\n");

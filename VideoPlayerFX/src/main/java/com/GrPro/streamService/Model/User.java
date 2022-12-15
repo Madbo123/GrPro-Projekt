@@ -110,8 +110,7 @@ public class User implements Serializable {
     public void addFavorite(Media media) {
         favorites.add(media);
     }
-
     public void removeFavorite(Media media) {
-        favorites.remove(media);
+        favorites.removeIf(as -> as.getTitle().equals(media.getTitle()));
     }
 }

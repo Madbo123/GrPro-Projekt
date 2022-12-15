@@ -47,7 +47,7 @@
             <Insets />
          </opaqueInsets>
       </ScrollPane>
-      <AnchorPane fx:id="toolBar" onMouseDragged="#DragEvent" onMousePressed="#StartDragEvent" prefHeight="66.0" prefWidth="1600.0" style="-fx-background-color: #1c1c1c;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <AnchorPane fx:id="toolBar" onMouseDragged="#DragEvent" onMousePressed="#StartDragEvent" prefHeight="66.0" prefWidth="1580.0" style="-fx-background-color: #1c1c1c;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0">
          <children>
             <Pane fx:id="openMenuBar" onMouseClicked="#openMenuEvent" prefHeight="65.0" prefWidth="80.0" styleClass="menuButton">
                <children>
@@ -55,6 +55,9 @@
                   <Pane layoutX="13.0" layoutY="13.0" prefHeight="8.0" prefWidth="55.0" style="-fx-background-color: GREY; -fx-background-radius: 15 15 15 15;" />
                   <Pane layoutX="13.0" layoutY="47.0" prefHeight="8.0" prefWidth="55.0" style="-fx-background-color: GREY; -fx-background-radius: 15 15 15 15;" />
                </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Pane>
             <Button fx:id="homeButton" alignment="CENTER" defaultButton="true" focusTraversable="false" layoutX="170.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="64.0" prefWidth="125.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" styleClass="homeButton" text="Home" textAlignment="CENTER" textFill="#e1e1e1">
                <font>
@@ -63,29 +66,41 @@
                <effect>
                   <ColorAdjust brightness="-0.17" />
                </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="filterMoviesButton" alignment="CENTER" defaultButton="true" focusTraversable="false" layoutX="295.0" mnemonicParsing="false" onAction="#filterMoviesbutton" prefHeight="64.0" prefWidth="140.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" styleClass="moviesButton" text="Movies" textAlignment="CENTER" textFill="#e1e1e1">
                <font>
                   <Font name="Corbel" size="30.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="filterSeriesButton" alignment="CENTER" defaultButton="true" focusTraversable="false" layoutX="435.0" mnemonicParsing="false" onAction="#filterSeriesButton" prefHeight="64.0" prefWidth="120.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" styleClass="seriesButton" text="Series" textAlignment="CENTER" textFill="#e1e1e1">
                <font>
                   <Font name="Corbel" size="30.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <TextField fx:id="mediaSearchField" focusTraversable="false" layoutX="595.0" layoutY="10.0" maxHeight="45.0" maxWidth="600.0" onKeyTyped="#searchFieldEvent" prefHeight="45.0" prefWidth="400.0" promptText="Search for Titles, Genres, etc" style="-fx-background-color: BLACK; -fx-border-color: GREY;" AnchorPane.leftAnchor="595.0" AnchorPane.rightAnchor="605.0">
                <font>
                   <Font size="20.0" />
                </font>
                <cursor>
-                  <Cursor fx:constant="DEFAULT" />
+                  <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <Button fx:id="FavoritesButton" layoutX="1015.0" mnemonicParsing="false" onAction="#favoritesButton" prefHeight="64.0" prefWidth="155.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" text="Favorites" textFill="#e1e1e1" AnchorPane.rightAnchor="430.0">
+            <Button fx:id="favoritesButton" layoutX="1015.0" mnemonicParsing="false" onAction="#favoritesButton" prefHeight="64.0" prefWidth="155.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #1c1c1c;" styleClass="moviesButton" text="Favorites" textFill="#e1e1e1" AnchorPane.rightAnchor="430.0">
                <font>
                   <Font name="Corbel" size="30.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <ImageView fitHeight="25.0" fitWidth="40.0" layoutX="1155.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="420.0">
                <image>
@@ -110,6 +125,9 @@
                      </points>
                   </Polygon>
                </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Pane>
          </children>
       </AnchorPane>
