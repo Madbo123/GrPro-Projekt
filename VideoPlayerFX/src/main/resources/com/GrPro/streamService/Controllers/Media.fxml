@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane fx:id="mediaPaneAnchor" onMousePressed="#playMedia" prefHeight="209.0" prefWidth="360.0" style="-fx-background-color: #141414; -fx-background-radius: 5 5 5 5;" styleClass="mediaPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GrPro.streamService.Controllers.MediaPaneController">
+<AnchorPane fx:id="mediaPaneAnchor"  prefHeight="209.0" prefWidth="360.0" style="-fx-background-color: #141414; -fx-background-radius: 5 5 5 5;" styleClass="mediaPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GrPro.streamService.Controllers.MediaPaneController">
     <children>
-        <ImageView fx:id="mediaImage" fitHeight="209.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView onMousePressed="#playMedia" fx:id="mediaImage" fitHeight="209.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Assets/CustomMediaImages/placeholder.jpg" />
          </image>
