@@ -9,8 +9,7 @@ import java.util.List;
 
 public class FilterController {
 
-    static String searchWord = "", type = "";
-    static List<String> genre = new ArrayList<>();
+    static String searchWord = "", type = "", genre = "";
 
     //Genres skal nok have mulighed for flere inputs.
     static List<String> genres = new ArrayList<>();
@@ -73,9 +72,7 @@ public class FilterController {
 
     public static void FilterByGenre(List<Media> copiedMediaList) {
 
-        for (String s : genre) {
-            copiedMediaList.removeIf(media -> !media.getCategories().contains(s));
-        }
+        copiedMediaList.removeIf(media -> !media.getCategories().contains(genre));
     }
 
     public static void FilterByRating(List<Media> copiedMediaList) {

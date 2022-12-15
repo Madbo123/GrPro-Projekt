@@ -1,6 +1,5 @@
 package com.GrPro.streamService.Controllers;
 
-import com.GrPro.streamService.Model.Singleton;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,9 +13,9 @@ public class Main extends Application {
     @Override
     public void start(Stage startStage) throws Exception {
         IOController.loadMedia();
-        Parent root = FXMLLoader.load(getClass().getResource("MediaAboutScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("MediaScreen.fxml"));
         startStage.initStyle(StageStyle.UNDECORATED);
-        Scene scene = new Scene(root,1400,800);
+        Scene scene = new Scene(root, 1600, 900);
         startStage.setScene(scene);
         startStage.show();
     }
