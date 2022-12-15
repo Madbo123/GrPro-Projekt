@@ -109,7 +109,7 @@ public class MediaAboutController {
         if (activeMedia instanceof Serie) ReleaseYearTextField.setText("Released: " + activeMedia.getReleaseYear() +
                                                                  " - " + ((Serie) activeMedia).getEndedYear());
         else ReleaseYearTextField.setText("Released: " + activeMedia.getReleaseYear());
-        RatingTextField.setText("Rating: " + activeMedia.getRating());
+        RatingTextField.setText("Rating: " + activeMedia.getRating() + "/10");
     }
 
     private void setMediaImage(String PosterFolder) {
@@ -166,11 +166,11 @@ public class MediaAboutController {
     }
 
     public void PlayMedia(){
-
+        // Plays the media in the mediaplayer
     }
 
     public void FavorMedia() {
-
+        // Adds the media to favorites
     }
 
 
