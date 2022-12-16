@@ -187,10 +187,18 @@ public class MediaScreenController implements Initializable {
         }
     }
 
+    public void onGenreClick(MouseEvent click) {
 
+        CheckBox cb = (CheckBox) click.getSource();
 
+        if (cb.isSelected()) {
+            genre.add(cb.getText());
+        } else {
+            genre.remove(cb.getText());
+        }
 
-
+        updateMediaDisplay();
+    }
 
     //Vis aktive filterknap
     public void dimButton(Button button) {

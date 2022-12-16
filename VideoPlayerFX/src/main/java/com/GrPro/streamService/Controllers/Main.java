@@ -1,6 +1,6 @@
 package com.GrPro.streamService.Controllers;
 
-import com.GrPro.streamService.Utility.Utilities;
+import com.GrPro.streamService.Model.Singleton;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +21,7 @@ public class Main extends Application {
         Parent root = loadStart.load();
         //currentController(loadStart.getController()); Til test via MediaScreen.fxml
         startStage.initStyle(StageStyle.UNDECORATED);
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,1400,800);
         startStage.setScene(scene);
         startStage.show();
         centerStage(startStage);
