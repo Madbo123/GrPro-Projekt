@@ -22,20 +22,24 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+
+import static com.GrPro.streamService.Controllers.MediaScreenController.currentMediaScreenController;
+import static com.GrPro.streamService.Controllers.MediaScreenController.paneMap;
+import static com.GrPro.streamService.Controllers.UserController.getCurrentUser;
+import static com.GrPro.streamService.Utility.Utilities.*;
 
 public class MediaAboutController {
 
     @FXML
-    private Button PlayButton, FavoriteButton, TempButton;
+    private Button PlayButton, FavoriteButton, BackButton;
     @FXML
     private ComboBox SeasonComboBox;
     @FXML
     private ImageView MediaImage;
     @FXML
-    private TextArea MediaTitleTextArea;
-    @FXML
-    private TextField GenresTextField, ReleaseYearTextField, RatingTextField;
+    private Label MediaTitleTextArea, GenresTextField, ReleaseYearTextField, RatingTextField;
     @FXML
     private VBox vBox;
 
@@ -46,34 +50,17 @@ public class MediaAboutController {
     private int episodeSpacing = 20;
     private int episodeWidth = 100;
 
-    public void TestInitialiseAboutPage() {
 
-        // This line is for test purposes only
-        Media media = (Media) Singleton.getInstance().getMediaList().get(199);
-        activeMedia = media;
 
-        // Determines which folder is necessary to look into to find the corresponding poster
-        // also determines the visibilty of Series specific components of the page
-        String PosterFolder;
-        if (media.getTypeOfMedia().equals("Movie")) {
-            SeasonComboBox.setVisible(false);
-            PosterFolder = "filmplakater";
-            setMediaImage(PosterFolder);
-        } else {
-            PosterFolder = "serieforsider";
-            setMediaImage(PosterFolder);
-            updateSeasons();
-        }
-
-        // Initializes the text and image of the about page to that of the selected media
-        setTextFields();
-
-    }
 
     public void InitialiseAboutPage(Media media) {
 
         activeMedia = media;
-
+        initUserRank();
+        if (activeMedia.getFavoriteOfCurrentUser()) {
+            FavoriteButton.setDisable(true);
+            FavoriteButton.setText("Favorited!");
+        }
         // Determines which folder is necessary to look into to find the corresponding poster
         // also determines the visibilty of Series specific components of the page
 
@@ -165,17 +152,69 @@ public class MediaAboutController {
 
     }
 
-    public void PlayMedia(){
+    public void PlayMedia(MouseEvent event) throws IOException {
+        FXMLLoader videoLoader = new FXMLLoader(getClass().getResource("MediaPlayer.fxml"));
+        Parent root = videoLoader.load();
+        Scene sceneSave = ((Node)event.getSource()).getScene();
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
 
+
+
+
+        MediaPlayerController mediaPlayerController = videoLoader.getController();
+
+        //Funktion til hvis serier havde episoder
+
+        /* if (activeMedia.getTypeOfMedia().equals("Serie")) {
+            int Season = SeasonComboBox.getPromptText();
+
+            int Episode = ((Node) event.getSource()).getId();
+
+            her ville man så getSeason(int Season, int Index);
+
+            mediaPlayerController.initializeVideoPlayer(File som media, sceneSave);
+        } */
+
+
+
+        mediaPlayerController.initializeVideoPlayer(activeMedia, sceneSave);
+
+        stage.show();
+        centerStage(stage);
     }
 
     public void FavorMedia() {
+        getCurrentUser().addFavorite(activeMedia);
+        activeMedia.setFavoriteOfCurrentUser(true);
+        FavoriteButton.setDisable(true);
+        FavoriteButton.setText("Favorited!");
 
+        paneMap.get(activeMedia.getTitle()).updateStars();
+
+
+
+        try {
+            IOController.save_User(getCurrentUser());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    public void BackButtonEvent() {
+        currentMediaScreenController.overlayPane.getChildren().clear();
+        currentMediaScreenController.overlayPane.setDisable(true);
+        currentMediaScreenController.overlayPane.setVisible(false);
 
+        currentMediaScreenController.mediaScrollPane.setDisable(false);
+    }
 
-
+    public void initUserRank() {
+        if (getCurrentUser().getUserRank().equals("Guest")) {
+            FavoriteButton.setDisable(true);
+        }
+    }
 
 
 }

@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static com.GrPro.streamService.Controllers.MediaScreenController.currentController;
 import static com.GrPro.streamService.Controllers.UserController.setUser;
 import static com.GrPro.streamService.Utility.Utilities.centerStage;
 import static com.GrPro.streamService.Utility.Utilities.getFieldInput;
@@ -48,7 +49,6 @@ public class LoginController {
     private Parent root;
 
     double x, y = 0;
-
 
 
     public boolean authenticate(String username, String password) throws IOException {
@@ -122,7 +122,9 @@ public class LoginController {
     }
 
     public void swapToKatflixMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("MediaScreen.fxml"));
+        FXMLLoader katflixLoad = new FXMLLoader(getClass().getResource("MediaScreen.fxml"));
+        root = katflixLoad.load();
+        currentController(katflixLoad.getController());
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -131,7 +133,8 @@ public class LoginController {
     }
 
     public void swapToCreateAccScreen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("CreateAccountScreen.fxml"));
+        FXMLLoader createAccLoader = new FXMLLoader(getClass().getResource("CreateAccountScreen.fxml"));
+        root = createAccLoader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

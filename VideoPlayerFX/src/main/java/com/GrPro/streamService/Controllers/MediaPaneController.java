@@ -26,6 +26,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Objects;
 
+import static com.GrPro.streamService.Controllers.MediaScreenController.currentMediaScreenController;
 import static com.GrPro.streamService.Controllers.UserController.getCurrentUser;
 import static com.GrPro.streamService.Utility.Utilities.*;
 
@@ -53,9 +54,10 @@ public class MediaPaneController {
     public ImageView starFill;
 
     @FXML
-    private ImageView starHollow;
+    public ImageView starHollow;
 
     private Media media;
+
 
 
 
@@ -69,7 +71,6 @@ public class MediaPaneController {
         mediaTitle.setText(media.getTitle());
         mediaRatingAvg.setText(Double.toString(media.getRating()));
     }
-
 
 
     public void setFavorite() {
@@ -136,6 +137,7 @@ public class MediaPaneController {
 
     }
 
+    //Sætter medier til favorit
     public void setStars() {
         for (Media med : getCurrentUser().getFavorites()) {
             if (med.getTitle().equals(media.getTitle())) {
@@ -146,6 +148,7 @@ public class MediaPaneController {
         }
     }
 
+    //Henter brugerens rank og begræns favorit-funktionalitet hvis det er en gæst.
     public void initFavs() {
         if (!getCurrentUser().getUserRank().equals("Guest") && getCurrentUser() != null) {
             setStars();
@@ -159,8 +162,19 @@ public class MediaPaneController {
     }
 
 
+    public void updateStars() {
+        for (Media med : getCurrentUser().getFavorites()) {
+            if (med.getTitle().equals(media.getTitle())) {
+                disableNode(starHollow);
+                enableNode(starFill);
+            }
+        }
+    }
 
 
+
+    //Gemmer scenen, som brugeren er på. Starter en ny scene og kan gå tilbage til den gamle scene på denne måde.
+    // (Her fjernes scenen midlertidigt for at minimere performance påvirkelse)
     public void playMedia(MouseEvent event) throws IOException {
         //DET HER VAR IKKE SJOVT AT FINDE UD AF HVORDAN MAN GJORDE
 
@@ -176,5 +190,21 @@ public class MediaPaneController {
 
         stage.show();
         centerStage(stage);
+    }
+
+    //Det her er en suboptimal løsning. Men alternativet er en samlet controller der styrer det hele, og det er der ikke tid til.
+    public void openAboutPage(MouseEvent event) throws IOException {
+        FXMLLoader aboutLoader = new FXMLLoader(getClass().getResource("MediaAboutScreen.fxml"));
+        AnchorPane aboutPageInstance = aboutLoader.load();
+        MediaAboutController aboutController = aboutLoader.getController();
+        aboutController.InitialiseAboutPage(media);
+
+
+
+
+        currentMediaScreenController.mediaScrollPane.setDisable(true);
+        currentMediaScreenController.overlayPane.getChildren().add(aboutPageInstance);
+        currentMediaScreenController.overlayPane.setDisable(false);
+        currentMediaScreenController.overlayPane.setVisible(true);
     }
 }

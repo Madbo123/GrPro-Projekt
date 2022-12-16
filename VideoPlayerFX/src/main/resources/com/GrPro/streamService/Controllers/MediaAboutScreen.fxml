@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: GRAY;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GrPro.streamService.Controllers.MediaAboutController">
+<AnchorPane maxHeight="600.0" maxWidth="900.0" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #434343;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.GrPro.streamService.Controllers.MediaAboutController">
    <children>
-      <VBox prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: GRAY;">
+      <VBox fillWidth="false" layoutY="39.0" prefHeight="560.0" prefWidth="900.0" style="-fx-background-color: #434343;">
          <children>
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
-              <items>
-                <Button fx:id="TempButton" mnemonicParsing="false" onAction="#TestInitialiseAboutPage" text="Test Page" />
-              </items>
-            </ToolBar>
-            <ScrollPane hbarPolicy="NEVER" hmax="0.0" prefHeight="560.0" prefWidth="900.0" style="-fx-background-color: GRAY;">
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" pannable="true" prefHeight="560.0" prefViewportHeight="540.0" prefViewportWidth="900.0" prefWidth="900.0" style="-fx-background-color: #434343;">
                <content>
-                  <FlowPane prefHeight="549.0" prefWidth="900.0">
+                  <FlowPane maxHeight="540.0" maxWidth="900.0" prefHeight="540.0" prefWidth="900.0" style="-fx-background-color: #434343;">
                      <children>
-                        <VBox fx:id="vBox" maxHeight="1.7976931348623157E308" prefHeight="558.0" prefWidth="900.0" style="-fx-background-color: GRAY;">
+                        <VBox fx:id="vBox" maxHeight="1.7976931348623157E308" prefHeight="558.0" prefWidth="900.0" style="-fx-background-color: #434343;">
                            <children>
-                              <HBox prefHeight="282.0" prefWidth="399.0" snapToPixel="false" style="-fx-background-color: GRAY;" VBox.vgrow="NEVER">
+                              <HBox prefHeight="282.0" prefWidth="399.0" snapToPixel="false" VBox.vgrow="NEVER">
                                  <children>
                                     <ImageView fx:id="MediaImage" fitHeight="350.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
@@ -39,41 +36,53 @@
                                        <image>
                                           <Image url="@../../../../Data/filmplakater/12%20Angry%20Men.jpg" />
                                        </image>
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
                                     </ImageView>
-                                    <VBox prefHeight="375.0" prefWidth="570.0" style="-fx-background-color: GRAY;">
+                                    <VBox fillWidth="false" prefHeight="375.0" prefWidth="570.0">
                                        <children>
-                                          <TextArea fx:id="MediaTitleTextArea" editable="false" prefHeight="62.0" prefWidth="402.0" promptText="Title" wrapText="true">
+                                          <Label fx:id="MediaTitleTextArea" alignment="TOP_LEFT" prefHeight="90.0" prefWidth="560.0" text="Title" textFill="#d38600" wrapText="true">
                                              <font>
                                                 <Font size="28.0" />
                                              </font>
                                              <VBox.margin>
-                                                <Insets right="20.0" top="20.0" />
+                                                <Insets top="20.0" />
                                              </VBox.margin>
-                                          </TextArea>
-                                          <TextField fx:id="GenresTextField" editable="false" maxWidth="500.0" prefWidth="400.0" promptText="Genres:">
-                                             <VBox.margin>
-                                                <Insets right="20.0" />
-                                             </VBox.margin>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="GenresTextField" maxWidth="500.0" prefWidth="400.0" text="Genres:" textFill="#d38600" wrapText="true">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
-                                          </TextField>
-                                          <TextField fx:id="RatingTextField" editable="false" layoutX="10.0" layoutY="92.0" maxWidth="500.0" prefWidth="200.0" promptText="Rating">
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
                                              <VBox.margin>
-                                                <Insets right="20.0" />
+                                                <Insets bottom="20.0" />
                                              </VBox.margin>
+                                          </Label>
+                                          <Label fx:id="RatingTextField" maxWidth="500.0" prefWidth="200.0" text="Rating" textFill="#d38600" wrapText="true">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
-                                          </TextField>
-                                          <TextField fx:id="ReleaseYearTextField" editable="false" layoutX="10.0" layoutY="118.0" maxWidth="500.0" prefWidth="200.0" promptText="Released">
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
                                              <VBox.margin>
-                                                <Insets right="20.0" />
+                                                <Insets bottom="20.0" />
                                              </VBox.margin>
+                                          </Label>
+                                          <Label fx:id="ReleaseYearTextField" maxWidth="500.0" prefWidth="200.0" text="Released" textFill="#d38600" wrapText="true">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
-                                          </TextField>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </Label>
                                        </children>
                                     </VBox>
                                  </children>
@@ -81,22 +90,37 @@
                                     <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="49.0" prefWidth="600.0" style="-fx-background-color: GRAY;">
+                              <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="49.0" prefWidth="600.0">
                                  <children>
-                                    <Button fx:id="PlayButton" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" onAction="#PlayMedia" prefHeight="26.0" prefWidth="100.0" text="Play" textAlignment="CENTER">
+                                    <Button fx:id="PlayButton" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#PlayMedia" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 85.782% 45.4976%, #e42a04 0.0%, #e48901 100.0%);" text="Play" textAlignment="CENTER">
                                        <HBox.margin>
                                           <Insets left="20.0" />
                                        </HBox.margin>
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </Button>
-                                    <Button fx:id="FavoriteButton" mnemonicParsing="false" onAction="#FavorMedia" prefHeight="26.0" prefWidth="100.0" text="Favorite" textAlignment="CENTER">
+                                    <Button fx:id="FavoriteButton" mnemonicParsing="false" onAction="#FavorMedia" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 85.782% 45.4976%, #e42a04 0.0%, #e48901 100.0%);" text="Favorite" textAlignment="CENTER">
                                        <HBox.margin>
                                           <Insets left="35.0" />
                                        </HBox.margin>
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </Button>
-                                    <ComboBox fx:id="SeasonComboBox" onAction="#updateEpisodeList" prefWidth="150.0">
+                                    <ComboBox fx:id="SeasonComboBox" onAction="#updateEpisodeList" prefWidth="150.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 85.782% 45.4976%, #e42a04 0.0%, #e48901 100.0%);">
                                        <HBox.margin>
                                           <Insets left="450.0" right="20.0" />
                                        </HBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </ComboBox>
                                  </children>
                                  <VBox.margin>
@@ -106,10 +130,25 @@
                            </children>
                         </VBox>
                      </children>
+                     <effect>
+                        <InnerShadow choke="0.26" height="91.34" radius="42.24" width="79.62" />
+                     </effect>
                   </FlowPane>
                </content>
             </ScrollPane>
          </children>
       </VBox>
+      <Pane prefHeight="40.0" prefWidth="900.0" style="-fx-background-color: #1c1c1c;">
+         <children>
+          <Button fx:id="BackButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#BackButtonEvent" opacity="0.8" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #ff0000 0.0%, #ff8d00 32.6076%, #c36800 52.6743%, #904f00 68.2579%, #512c00 81.3104%, #1e1e1e 94.2953%, #1e1e1e 100.0%); -fx-background-radius: 0;" text="BACK">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

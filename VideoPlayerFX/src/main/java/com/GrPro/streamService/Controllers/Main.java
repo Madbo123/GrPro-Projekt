@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import static com.GrPro.streamService.Controllers.MediaScreenController.currentController;
 import static com.GrPro.streamService.Utility.Utilities.centerStage;
 
 
@@ -16,7 +17,9 @@ public class Main extends Application {
     @Override
     public void start(Stage startStage) throws Exception {
         IOController.loadMedia();
-        Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
+        FXMLLoader loadStart = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
+        Parent root = loadStart.load();
+        //currentController(loadStart.getController()); Til test via MediaScreen.fxml
         startStage.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(root);
         startStage.setScene(scene);

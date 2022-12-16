@@ -35,9 +35,9 @@ import static com.GrPro.streamService.Utility.Utilities.*;
 public class MediaScreenController implements Initializable {
 
     @FXML
-    private Pane openMenuBar, userImageButton, openAccMenuButton, closeAccMenuButton;
+    private Pane openMenuBar, userImageButton, openAccMenuButton, closeAccMenuButton, favoritesButton;
     @FXML
-    private Button homeButton, filterMoviesButton, filterSeriesButton, favoritesButton, LogOutButton, confirmChangeButton, changePassButton, changeDNButton;
+    private Button homeButton, filterMoviesButton, filterSeriesButton, LogOutButton, confirmChangeButton, changePassButton, changeDNButton, exitButton;
     @FXML
     private PasswordField changePasswordField, changePasswordFieldConf;
     @FXML
@@ -45,9 +45,9 @@ public class MediaScreenController implements Initializable {
     @FXML
     private TextField changeDisplaynameField, changeDisplaynameFieldConf;
     @FXML
-    private Label accDisplaynameLabel, accUsernameLabel, toolBarAccNameLabel;
+    private Label accDisplaynameLabel, accUsernameLabel, toolBarAccNameLabel, favoritesText;
     @FXML
-    private ScrollPane mediaScrollPane;
+    public ScrollPane mediaScrollPane;
     @FXML
     private VBox menuBox;
     @FXML
@@ -55,12 +55,15 @@ public class MediaScreenController implements Initializable {
     @FXML
     private AnchorPane toolBar, accMenuBox, accManagementBox;
     @FXML
-    public AnchorPane mediaScreenAnchor;
+    public AnchorPane mediaScreenAnchor, overlayPane;
     @FXML
-    private FlowPane mediaFlowPane;
+    public FlowPane mediaFlowPane;
 
     private Media videoMedia;
     double x, y = 0;
+
+    public static HashMap<String, MediaPaneController> paneMap = new HashMap<>();
+    public static MediaScreenController currentMediaScreenController;
 
 
     @Override
@@ -87,10 +90,12 @@ public class MediaScreenController implements Initializable {
             FXMLLoader mediaPaneLoader = new FXMLLoader(getClass().getResource("Media.fxml"));
             AnchorPane mediaPane = mediaPaneLoader.load();
             MediaPaneController mediaPaneController = mediaPaneLoader.getController();
-            //mediaPaneController.setMedia(media);
+
             mediaPaneController.initializeMediaPane(media);
             mediaPane.setId(media.getTitle());
             mediaFlowPane.getChildren().add(mediaPane);
+
+            paneMap.put(mediaPane.getId(), mediaPaneController);
         }
     }
 
@@ -131,7 +136,9 @@ public class MediaScreenController implements Initializable {
         updateMediaDisplay();
     }
 
-
+    public static void currentController(MediaScreenController current) {
+        currentMediaScreenController = current;
+    }
 
 
     //Nulstiller type filter.
@@ -163,38 +170,47 @@ public class MediaScreenController implements Initializable {
 
 
     //Fav display her
-    public void favoritesButton() {
+    public void favoritesButton(MouseEvent event) {
+        favoritesButton.setEffect(new ColorAdjust(0, 0, -0.17, 0));
+        filterMoviesButton.setEffect(null);
+        filterSeriesButton.setEffect(null);
+        homeButton.setEffect(null);
+
+
         for (Node mediaPane : mediaFlowPane.getChildren()) {
+            disableNode(mediaPane);
             for (Media media: getCurrentUser().getFavorites()) {
                 if (media.getTitle().equals(((Media) mediaPane.getUserData()).getTitle())) {
                     enableNode(mediaPane);
-                    break;
-                }
-                else {
-                    disableNode(mediaPane);
                 }
             }
         }
     }
 
+
+
+
+
+
     //Vis aktive filterknap
     public void dimButton(Button button) {
         button.setEffect(new ColorAdjust(0, 0, -0.17, 0));
 
-        String buttonName = button.getText();
-
-        switch (buttonName) {
+        switch (button.getText()) {
             case "Home" -> {
                 filterMoviesButton.setEffect(null);
                 filterSeriesButton.setEffect(null);
+                favoritesButton.setEffect(null);
             }
             case "Movies" -> {
                 homeButton.setEffect(null);
                 filterSeriesButton.setEffect(null);
+                favoritesButton.setEffect(null);
             }
             case "Series" -> {
                 homeButton.setEffect(null);
                 filterMoviesButton.setEffect(null);
+                favoritesButton.setEffect(null);
             }
         }
     }
@@ -360,13 +376,16 @@ public class MediaScreenController implements Initializable {
             changePassButton.setDisable(true);
             changeDNButton.setText("Disabled | Guest");
             changeDNButton.setDisable(true);
-            favoritesButton.setText("Disabled | Guest");
-            favoritesButton.setFont(Font.font(16));
+            favoritesText.setText("Disabled | Guest");
+            favoritesText.setFont(Font.font(16));
             favoritesButton.setDisable(true);
         }
     }
 
-
+    public void ExitButtonEvent() {
+        Stage stage = (Stage)exitButton.getScene().getWindow();
+        stage.close();
+    }
     public void logOutButton(ActionEvent event) throws IOException {
         setUser(null);
         Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));

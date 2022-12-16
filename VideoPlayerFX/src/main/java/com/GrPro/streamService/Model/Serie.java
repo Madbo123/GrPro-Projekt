@@ -23,4 +23,10 @@ public class Serie extends Media {
         return episodes;
     }
     public int getEndedYear() { return endedYear; }
+
+
+    //Den her skulle anvendes inden i en funktion til sæsoner der ville have en liste af lister.
+    public File getEpisodeByIndex(int index) {
+        return episodes.get(index);
+    }
 }
